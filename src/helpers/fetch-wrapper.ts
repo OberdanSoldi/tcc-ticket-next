@@ -1,6 +1,5 @@
-"use client";
-
-import { HttpClient } from "@/domain/httpClient";
+import type { HttpClient } from "@/domain/HttpClient";
+import { createDefaultConfig } from "@/utils/create-default-config";
 import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 
 class FetchWrapper implements HttpClient {
@@ -8,7 +7,8 @@ class FetchWrapper implements HttpClient {
     url: string,
     config?: AxiosRequestConfig | undefined
   ): Promise<T> {
-    const response: AxiosResponse<T> = await axios.get(url, config);
+    const defaultConfig = createDefaultConfig(config);
+    const response: AxiosResponse<T> = await axios.get(url, defaultConfig);
     return response.data;
   }
 
@@ -17,7 +17,12 @@ class FetchWrapper implements HttpClient {
     body: K,
     config?: AxiosRequestConfig | undefined
   ): Promise<T> {
-    const response: AxiosResponse<T> = await axios.post(url, body, config);
+    const defaultConfig = createDefaultConfig(config);
+    const response: AxiosResponse<T> = await axios.post(
+      url,
+      body,
+      defaultConfig
+    );
     return response.data;
   }
 
@@ -26,7 +31,12 @@ class FetchWrapper implements HttpClient {
     body: K,
     config?: AxiosRequestConfig | undefined
   ): Promise<T> {
-    const response: AxiosResponse<T> = await axios.put(url, body, config);
+    const defaultConfig = createDefaultConfig(config);
+    const response: AxiosResponse<T> = await axios.put(
+      url,
+      body,
+      defaultConfig
+    );
     return response.data;
   }
 
@@ -34,7 +44,8 @@ class FetchWrapper implements HttpClient {
     url: string,
     config?: AxiosRequestConfig | undefined
   ): Promise<T> {
-    const response: AxiosResponse<T> = await axios.delete(url, config);
+    const defaultConfig = createDefaultConfig(config);
+    const response: AxiosResponse<T> = await axios.delete(url, defaultConfig);
     return response.data;
   }
 
@@ -43,7 +54,12 @@ class FetchWrapper implements HttpClient {
     body: K,
     config?: AxiosRequestConfig | undefined
   ): Promise<T> {
-    const response: AxiosResponse<T> = await axios.patch(url, body, config);
+    const defaultConfig = createDefaultConfig(config);
+    const response: AxiosResponse<T> = await axios.patch(
+      url,
+      body,
+      defaultConfig
+    );
     return response.data;
   }
 }

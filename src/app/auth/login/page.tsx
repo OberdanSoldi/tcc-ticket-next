@@ -2,17 +2,17 @@
 
 import { useForm } from "react-hook-form";
 import { type IFormInput } from "./types";
-import { userService } from "@/services/user.service";
+import { userService } from "@/services/user-service";
+import { authHeader } from "@/helpers/auth-header";
 
 const Login = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
 
   const onSubmit = (data: IFormInput) => {
-    console.log(data.password);
     userService
       .login({ email: data.email, password: data.password })
       .then((res) => {
-        console.log("logged in", res);
+        console.log("logged in");
       });
   };
 
