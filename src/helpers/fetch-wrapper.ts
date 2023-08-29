@@ -1,7 +1,7 @@
 "use client";
 
 import { HttpClient } from "@/domain/httpClient";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 
 class FetchWrapper implements HttpClient {
   async get<T>(
