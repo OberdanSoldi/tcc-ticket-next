@@ -1,5 +1,3 @@
-"use client";
-
 import type { AxiosRequestHeaders } from "axios";
 
 export class AuthHeader {

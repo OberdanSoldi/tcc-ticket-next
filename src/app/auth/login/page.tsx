@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { type IFormInput } from "./types";
 import { userService } from "@/services/user-service";
-import { authHeader } from "@/helpers/auth-header";
 
 const Login = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
@@ -14,6 +13,10 @@ const Login = () => {
       .then((res) => {
         console.log("logged in");
       });
+
+    userService.getUserTickets().then((res) => {
+      console.log(res);
+    });
   };
 
   return (
