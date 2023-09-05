@@ -3,21 +3,16 @@
 import { useForm } from "react-hook-form";
 import { type IFormInput } from "./types";
 import { userService } from "@/services/user-service";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
+  const router = useRouter();
 
-  const onSubmit = (data: IFormInput) => {
-    userService
-      .login({ email: data.email, password: data.password })
-      .then((res) => {
-        console.log("logged in");
-      });
-
-    userService.getUserTickets().then((res) => {
-      console.log(res);
-    });
-  };
+  async function onSubmit({ email, password }: IFormInput) {
+    await userService.login({ email, password });
+    router.push("/dashboard");
+  }
 
   return (
     <div>

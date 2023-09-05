@@ -1,4 +1,4 @@
-import { redirect, useParams } from "next/navigation";
+import { headers } from "next/headers";
 
 export default function LoginLayout({
   children,
