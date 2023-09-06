@@ -4,14 +4,24 @@ import { useForm } from "react-hook-form";
 import { type IFormInput } from "./types";
 import { userService } from "@/services/user-service";
 import { useRouter } from "next/navigation";
+import { InputField } from "@/components/InputField";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<IFormInput>();
   const router = useRouter();
 
   async function onSubmit({ email, password }: IFormInput) {
-    await userService.login({ email, password });
-    router.push("/dashboard");
+    try {
+      await userService.login({ email, password });
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -19,6 +29,13 @@ const Login = () => {
       <h1>Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register("email")} type="text" placeholder="Email" />
+        <InputField
+          id="email"
+          type="text"
+          variant="outlined"
+          errors={errors}
+          {...register("email")}
+        />
         <input
           {...register("password")}
           type="password"
