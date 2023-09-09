@@ -1,20 +1,22 @@
 import React from "react";
-import type { IInputFieldProps } from "./types";
-import { FormHelperText, Input } from "@mui/joy";
+import type { InputProps } from "./types";
 
-const InputField: React.FC<IInputFieldProps> = ({
-  id,
-  type,
-  variant,
-  error,
-  ...rest
-}) => {
+const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { name, error, placeholder, type, ...rest },
+  ref
+) => {
   return (
     <>
-      <Input id={id} type={type} variant={variant} {...rest} />
-      {error && <FormHelperText>{error?.message}</FormHelperText>}
+      <input
+        name={name}
+        type={type}
+        ref={ref}
+        placeholder={placeholder}
+        {...rest}
+      />
+      {!!error && <span>{error.message}</span>}
     </>
   );
 };
 
-export { InputField };
+export const InputField = React.forwardRef(Input);

@@ -1,16 +1,8 @@
-import { InputProps } from "@mui/joy";
-import type { HtmlHTMLAttributes, InputHTMLAttributes } from "react";
-import type {
-  FieldError,
-  FieldErrors,
-  FieldValues,
-  UseFormRegister,
-} from "react-hook-form";
+import type { InputHTMLAttributes } from "react";
+import type { FieldError } from "react-hook-form";
 
-export interface IInputFieldProps
-  extends HtmlHTMLAttributes<InputHTMLAttributes> {
-  id: string;
-  label: string;
-  errors: FieldErrors<FieldValues>;
-  error: string;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  error?: FieldError;
+  placeholder?: string;
 }
