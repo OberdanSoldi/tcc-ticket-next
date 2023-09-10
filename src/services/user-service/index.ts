@@ -14,7 +14,6 @@ class UserService {
       );
       localStorage.setItem("access_token", response.access_token);
     } catch (ex) {
-      console.error("Error while logging in", ex);
       throw ex;
     }
   }

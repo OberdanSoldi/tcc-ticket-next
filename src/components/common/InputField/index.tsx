@@ -1,20 +1,22 @@
 import React from "react";
 import type { InputProps } from "./types";
+import { BaseTextFieldProps, TextField } from "@mui/material";
 
 const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { name, error, placeholder, type, ...rest },
+  { fieldError, placeholder, type, inputName, ...rest },
   ref
 ) => {
   return (
     <>
-      <input
-        name={name}
-        type={type}
+      <TextField
         ref={ref}
+        id={inputName}
+        name={inputName}
         placeholder={placeholder}
+        type={type}
         {...rest}
       />
-      {!!error && <span>{error.message}</span>}
+      {!!fieldError && <span>{fieldError.message}</span>}
     </>
   );
 };

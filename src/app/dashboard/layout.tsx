@@ -1,9 +1,10 @@
 "use client";
 
 import { useSsr } from "@/hooks/useSsr";
-import { userService } from "@/services/user-service";
 import { isLoggedIn } from "@/utils/is-logged";
 import { useRouter } from "next/navigation";
+
+import style from "./style.module.scss";
 
 export default function DashboardLayout({
   children,
@@ -18,7 +19,5 @@ export default function DashboardLayout({
     return;
   }
 
-  userService.getUserRole();
-
-  return <main>{children}</main>;
+  return <main className={style.dashboard}>{children}</main>;
 }

@@ -1,0 +1,77 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .card {
+    padding: 22px;
+    background-color: #202024;
+
+    .cardImage {
+      display: flex;
+      justify-content: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .spacing {
+        margin-bottom: 22px;
+      }
+
+      .inputField {
+        width: 300px;
+        background-color: #121214;
+
+        [id^="email-helper-text"],
+        [id^="password-helper-text"] {
+          margin: 0 !important;
+          padding-top: 2px !important;
+          background-color: #202024 !important;
+          padding-left: 14px !important;
+        }
+
+        input {
+          color: #fff;
+        }
+
+        label {
+          color: #fff;
+        }
+      }
+
+      .forgotPassword {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #8257e6;
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+          color: #906de2;
+        }
+      }
+
+      .loginButton {
+        font-weight: 600;
+        background-color: #8257e6;
+
+        &:active {
+          background-color: #8257e5;
+        }
+
+        &:hover {
+          background-color: #906de2;
+        }
+
+        &:disabled {
+          background-color: #8257e6;
+        }
+      }
+    }
+  }
+}
