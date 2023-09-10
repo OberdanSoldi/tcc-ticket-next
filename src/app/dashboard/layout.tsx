@@ -5,6 +5,7 @@ import { isLoggedIn } from "@/utils/is-logged";
 import { useRouter } from "next/navigation";
 
 import style from "./style.module.scss";
+import { NavBar } from "@/components/common/NavBar";
 
 export default function DashboardLayout({
   children,
@@ -19,5 +20,10 @@ export default function DashboardLayout({
     return;
   }
 
-  return <main className={style.dashboard}>{children}</main>;
+  return (
+    <main className={style.dashboard}>
+      <NavBar />
+      {children}
+    </main>
+  );
 }

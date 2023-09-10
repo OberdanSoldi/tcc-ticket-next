@@ -1,0 +1,40 @@
+.appBar {
+  height: 70px;
+
+  .navBar {
+    background-color: #202024;
+
+    [class*="MuiGrid-container"] {
+      height: 100%;
+    }
+
+    .navItem {
+      height: 100%;
+      border-bottom: 2px solid #8257e6;
+
+      &:hover {
+        border-bottom: 2px solid #906de2;
+      }
+
+      .navButton {
+        text-transform: capitalize;
+        font-size: 16px;
+        font-weight: 700;
+        color: #8257e6;
+        height: 100%;
+
+        &:hover {
+          background-color: transparent;
+          a {
+            color: #a0a0aa;
+          }
+        }
+
+        .buttonLink {
+          text-decoration: none;
+          color: #c1c1cc;
+        }
+      }
+    }
+  }
+}
