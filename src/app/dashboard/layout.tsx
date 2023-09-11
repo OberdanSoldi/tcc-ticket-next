@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import style from "./style.module.scss";
 import { NavBar } from "@/components/common/NavBar";
+import React from "react";
 
 export default function DashboardLayout({
   children,
@@ -15,10 +16,11 @@ export default function DashboardLayout({
   const { isBrowser } = useSsr();
   const { push } = useRouter();
 
-  if (isBrowser && !isLoggedIn()) {
-    push("/auth/login");
-    return;
-  }
+  React.useEffect(() => {
+    if (!isLoggedIn()) {
+      push("/auth/login");
+    }
+  }, [isBrowser]);
 
   return (
     <main className={style.dashboard}>
