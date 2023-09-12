@@ -1,6 +1,6 @@
 import React from "react";
 import type { InputProps } from "./types";
-import { BaseTextFieldProps, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
 const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { fieldError, placeholder, type, inputName, ...rest },

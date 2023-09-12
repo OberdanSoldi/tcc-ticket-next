@@ -6,20 +6,50 @@
   height: 100%;
 
   .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+    background-color: #202024;
+    width: 70%;
 
-    .item {
+    .formTitle {
+      font-size: 32px;
+      color: #e1e1e6;
+    }
+
+    .formFieldsContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
 
-      .select {
-        width: 235px;
+      .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 40%;
+
+        .fieldLabel {
+          padding-bottom: 4px;
+          font-size: 16px;
+          color: #e1e1e6;
+        }
+
+        .inputField {
+          background-color: #121214;
+
+          input {
+            color: #fff;
+          }
+
+          label {
+            color: #fff;
+          }
+        }
+
+        [id^="problem-label"],
+        [id^="priority-label"],
+        [id^="assignee-label"] {
+          background-color: #121214;
+          color: #fff;
+        }
       }
     }
   }

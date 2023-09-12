@@ -15,8 +15,10 @@ const InputSelect: React.ForwardRefRenderFunction<
   const isItemsValid = items?.length! > 0;
   return (
     <FormControl size="small">
-      <InputLabel>{placeholder}</InputLabel>
+      <InputLabel id={`${selectName}-label`}>{placeholder}</InputLabel>
       <Select
+        labelId={`${selectName}-label`}
+        defaultValue=""
         id={selectName}
         label={placeholder}
         name={selectName}
