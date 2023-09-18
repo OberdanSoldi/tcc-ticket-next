@@ -7,7 +7,7 @@
 
   .container {
     background-color: #202024;
-    width: 70%;
+    width: 48%;
 
     .formTitle {
       font-size: 32px;
@@ -44,11 +44,33 @@
           }
         }
 
-        [id^="problem-label"],
-        [id^="priority-label"],
-        [id^="assignee-label"] {
+        [id^="problem"],
+        [id^="priority"],
+        [id^="assignee"] {
           background-color: #121214;
           color: #fff;
+        }
+      }
+
+      [class^="MuiSvgIcon-root"] {
+        fill: #fff;
+      }
+
+      .submitButton {
+        font-weight: 600;
+        color: #fff;
+        background-color: #8257e6;
+
+        &:active {
+          background-color: #8257e5;
+        }
+
+        &:hover {
+          background-color: #906de2;
+        }
+
+        &:disabled {
+          background-color: #8257e6;
         }
       }
     }

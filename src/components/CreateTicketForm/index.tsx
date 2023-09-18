@@ -1,20 +1,28 @@
 "use client";
 
-import { Card, CardContent, Grid } from "@mui/material";
 import React from "react";
+import { UserRole } from "@/domain/enums/UserRole";
+import { userService } from "@/services/user-service";
+import { LoadingButton } from "@mui/lab";
+import { Card, CardContent, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { InputField } from "../common/InputField";
 import { SelectField } from "../common/SelectField";
 import { adminFormFields } from "./constants";
-import { InputField } from "../common/InputField";
-import { userService } from "@/services/user-service";
-import { UserRole } from "@/domain/enums/UserRole";
+import { InputSelectItems } from "@/domain/InputSelectItems";
+import { ticketService } from "@/services/ticket-service";
 import type { CreateTicketAdminForm, CreateTicketUserForm } from "./types";
-import { LoadingButton } from "@mui/lab";
 
 import style from "./style.module.scss";
+import { MessageToast } from "../common/MessageToast";
 
 const CreateTicketForm: React.FC = () => {
   const [userRole, setUserRole] = React.useState<UserRole>();
+  const [users, setUsers] = React.useState<InputSelectItems[]>([]);
+  const [toastMessage, setToastMessage] = React.useState({
+    haveError: false,
+    message: "",
+  });
 
   React.useEffect(() => {
     userService.getUserRole().then((role) => {
@@ -24,23 +32,60 @@ const CreateTicketForm: React.FC = () => {
 
   const isUserAdmin = userRole === UserRole.ADMIN;
 
+  const formFields = isUserAdmin ? adminFormFields : [];
+
+  const toastHaveErrorMessage = toastMessage.message.length > 0;
+
+  React.useEffect(() => {
+    if (isUserAdmin) {
+      (async () => {
+        const data = await userService.getUsers();
+        const users = data.map((it) => {
+          return {
+            name: it.name,
+            value: it.id,
+          };
+        });
+        setUsers(users);
+      })();
+    }
+  }, [isUserAdmin]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  function submitHandler(data: unknown) {
+  async function submitHandler(data: unknown) {
     if (isUserAdmin) {
-      adminOnSubmit(data as CreateTicketAdminForm);
+      await adminOnSubmit(data as CreateTicketAdminForm);
     } else {
-      userOnSubmit(data as CreateTicketUserForm);
+      await userOnSubmit(data as CreateTicketUserForm);
     }
   }
 
-  function adminOnSubmit(data: CreateTicketAdminForm) {
-    //TODO: criar logica de submit de adm
-    console.log(data);
+  async function toastHandler(haveError: boolean, message: string) {
+    setToastMessage({
+      haveError,
+      message,
+    });
+    setTimeout(() => {
+      setToastMessage({
+        haveError: false,
+        message: "",
+      });
+    }, 2000);
+  }
+
+  async function adminOnSubmit(data: CreateTicketAdminForm) {
+    try {
+      await ticketService.adminCreateTicket(data);
+      toastHandler(false, "Ticket criado com sucesso!");
+    } catch (e) {
+      toastHandler(true, "Erro ao criar ticket!");
+      console.error(e);
+    }
   }
 
   function userOnSubmit(data: CreateTicketUserForm) {
@@ -51,13 +96,14 @@ const CreateTicketForm: React.FC = () => {
   return (
     <div className={style.wrapper}>
       <Card className={style.container}>
-        <CardContent className={style.formTitle}>Criar Ticket</CardContent>
         <CardContent className={style.formFieldsContainer}>
           <form onSubmit={handleSubmit(submitHandler)}>
             <Grid container spacing={2}>
-              {adminFormFields.map((field, index) => (
+              <Grid item md={12} xs={12}>
+                <span className={style.formTitle}>Criar Ticket</span>
+              </Grid>
+              {formFields.map((field, index) => (
                 <Grid className={style.item} key={index} item md={6} xs={12}>
-                  {/* <label className={style.fieldLabel}>{field.label}</label> */}
                   {field.type === "text" && (
                     <InputField
                       {...register(field.name)}
@@ -72,17 +118,25 @@ const CreateTicketForm: React.FC = () => {
                     <SelectField
                       {...register(field.name)}
                       placeholder={field.label}
-                      className={style.select}
+                      className={style.selectField}
                       selectName={field.name}
                       label={field.label}
-                      items={field.options!}
+                      items={
+                        isUserAdmin && field.name === "assignee"
+                          ? users
+                          : field.options!
+                      }
                       size="small"
                     />
                   )}
                 </Grid>
               ))}
-              <Grid item md={12}>
-                <LoadingButton fullWidth type="submit">
+              <Grid item md={12} xs={12}>
+                <LoadingButton
+                  className={style.submitButton}
+                  fullWidth
+                  type="submit"
+                >
                   Enviar
                 </LoadingButton>
               </Grid>
@@ -90,6 +144,14 @@ const CreateTicketForm: React.FC = () => {
           </form>
         </CardContent>
       </Card>
+      {toastHaveErrorMessage && (
+        <MessageToast
+          open={toastMessage.haveError}
+          handleClose={() => {}}
+          severity={toastMessage.haveError ? "error" : "success"}
+          messageText={toastMessage.message}
+        />
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { UserRole } from "@/domain/enums/UserRole";
+
 export interface ILoginRequest {
   email: string;
   password: string;

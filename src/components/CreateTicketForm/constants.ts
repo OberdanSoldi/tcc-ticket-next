@@ -18,15 +18,19 @@ const problemTypes: InputSelectItems[] = [
 const priorityTypes: InputSelectItems[] = [
   {
     name: "Baixa",
-    value: "baixa",
+    value: "LOW",
   },
   {
     name: "Média",
-    value: "media",
+    value: "MEDIUM",
   },
   {
     name: "Alta",
-    value: "alta",
+    value: "HIGH",
+  },
+  {
+    name: "Urgente",
+    value: "URGENT",
   },
 ];
 
@@ -43,15 +47,15 @@ const assigneeTypes: InputSelectItems[] = [
 
 export const adminFormFields = [
   {
+    name: "title",
+    label: "Título",
+    type: "text",
+  },
+  {
     name: "problem",
     label: "Defina o tipo do problema",
     type: "select",
     options: problemTypes,
-  },
-  {
-    name: "title",
-    label: "Título",
-    type: "text",
   },
   {
     name: "description",
@@ -59,15 +63,15 @@ export const adminFormFields = [
     type: "text",
   },
   {
-    name: "machineId",
-    label: "Máquina",
-    type: "text",
-  },
-  {
     name: "priority",
     label: "Prioridade",
     type: "select",
     options: priorityTypes,
+  },
+  {
+    name: "computer_id",
+    label: "Máquina",
+    type: "text",
   },
   {
     name: "assignee",
