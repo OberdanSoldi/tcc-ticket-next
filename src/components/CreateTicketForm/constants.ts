@@ -74,9 +74,33 @@ export const adminFormFields = [
     type: "text",
   },
   {
-    name: "assignee",
+    name: "assigned_to",
     label: "Responsável",
     type: "select",
     options: assigneeTypes,
+  },
+];
+
+export const userFormFields = [
+  {
+    name: "title",
+    label: "Título",
+    type: "text",
+  },
+  {
+    name: "problem",
+    label: "Defina o tipo do problema",
+    type: "select",
+    options: problemTypes,
+  },
+  {
+    name: "description",
+    label: "Descrição",
+    type: "text",
+  },
+  {
+    name: "computer_id",
+    label: "Máquina",
+    type: "text",
   },
 ];

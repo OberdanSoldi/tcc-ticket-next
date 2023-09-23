@@ -8,13 +8,13 @@ import { Card, CardContent, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { InputField } from "../common/InputField";
 import { SelectField } from "../common/SelectField";
-import { adminFormFields } from "./constants";
+import { adminFormFields, userFormFields } from "./constants";
 import { InputSelectItems } from "@/domain/InputSelectItems";
 import { ticketService } from "@/services/ticket-service";
+import { MessageToast } from "../common/MessageToast";
 import type { CreateTicketAdminForm, CreateTicketUserForm } from "./types";
 
 import style from "./style.module.scss";
-import { MessageToast } from "../common/MessageToast";
 
 const CreateTicketForm: React.FC = () => {
   const [userRole, setUserRole] = React.useState<UserRole>();
@@ -32,9 +32,11 @@ const CreateTicketForm: React.FC = () => {
 
   const isUserAdmin = userRole === UserRole.ADMIN;
 
-  const formFields = isUserAdmin ? adminFormFields : [];
+  const formFields = isUserAdmin ? adminFormFields : userFormFields;
 
   const toastHaveErrorMessage = toastMessage.message.length > 0;
+
+  const toastSeverity = toastMessage.haveError ? "error" : "success";
 
   React.useEffect(() => {
     if (isUserAdmin) {
@@ -72,7 +74,7 @@ const CreateTicketForm: React.FC = () => {
     });
     setTimeout(() => {
       setToastMessage({
-        haveError: false,
+        haveError: true,
         message: "",
       });
     }, 2000);
@@ -88,9 +90,14 @@ const CreateTicketForm: React.FC = () => {
     }
   }
 
-  function userOnSubmit(data: CreateTicketUserForm) {
-    //TODO: criar logia de submit de user
-    console.log(data);
+  async function userOnSubmit(data: CreateTicketUserForm) {
+    try {
+      await ticketService.userCreateTicket(data);
+      toastHandler(false, "Ticket criado com sucesso!");
+    } catch (e) {
+      toastHandler(true, "Erro ao criar ticket!");
+      console.error(e);
+    }
   }
 
   return (
@@ -122,7 +129,7 @@ const CreateTicketForm: React.FC = () => {
                       selectName={field.name}
                       label={field.label}
                       items={
-                        isUserAdmin && field.name === "assignee"
+                        isUserAdmin && field.name === "assigned_to"
                           ? users
                           : field.options!
                       }
@@ -146,9 +153,9 @@ const CreateTicketForm: React.FC = () => {
       </Card>
       {toastHaveErrorMessage && (
         <MessageToast
-          open={toastMessage.haveError}
+          open={toastHaveErrorMessage}
           handleClose={() => {}}
-          severity={toastMessage.haveError ? "error" : "success"}
+          severity={toastSeverity}
           messageText={toastMessage.message}
         />
       )}

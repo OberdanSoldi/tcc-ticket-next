@@ -1,0 +1,70 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #202024;
+    height: calc(100vh - 106px);
+
+    h2 {
+      color: #fff;
+    }
+
+    [class*="MuiTableRow"] {
+      border-radius: 8px 8px 0 0;
+      background-color: #202024;
+      color: #fff;
+
+      th,
+      td {
+        color: #fff;
+      }
+
+      th {
+        background-color: #323238;
+      }
+
+      td {
+        background-color: #29292e;
+      }
+    }
+
+    [class*="MuiTableCell"] {
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &::before {
+          content: "";
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+.statusSpanColumn-open {
+  &::before {
+    background: #4cd62b;
+  }
+}
+
+.statusSpanColumn-close {
+  &::before {
+    background: #e83f5b;
+  }
+}
+
+.statusSpanColumn-inProgress {
+  &::before {
+    background: #eba417;
+  }
+}
