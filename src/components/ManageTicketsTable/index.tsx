@@ -1,29 +1,27 @@
-"use client";
-import MaterialReactTable, { type MRT_ColumnDef } from "material-react-table";
-import React from "react";
 import { Card, CardContent } from "@mui/material";
+import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import type { Ticket } from "@/domain/Ticket";
+import { TicketTableActions } from "./TicketTableActions";
+import { getStatusColor } from "@/utils/get-status-color";
 import { ticketService } from "@/services/ticket-service";
+import React from "react";
 
 import style from "./style.module.scss";
-import { SeeFullTicket } from "./SeeFullTicket";
-import axios from "axios";
-import { getStatusColor } from "@/utils/get-status-color";
 
-const HistoryTable: React.FC = () => {
-  const isUserAdmin = true;
+const ManageTicketsTable: React.FC = () => {
   const [tickets, setTickets] = React.useState<Ticket[]>([]);
 
   async function fetchTickets() {
     const response = await ticketService.getAllTickets();
-    setTickets(response);
+
+    setTickets(response.filter((ticket) => ticket.status !== "Fechado"));
   }
 
   React.useEffect(() => {
     fetchTickets();
   }, []);
 
-  const adminTableColumns: MRT_ColumnDef<Ticket>[] = [
+  const tableColumns: MRT_ColumnDef<Ticket>[] = [
     {
       accessorKey: "title",
       header: "Título",
@@ -57,13 +55,11 @@ const HistoryTable: React.FC = () => {
     },
   ];
 
-  const tableColumns = isUserAdmin ? adminTableColumns : [];
-
   return (
     <div className={style.wrapper}>
-      <Card className={style.card}>
+      <Card className={style.container}>
         <CardContent>
-          <h2>Histórico de tickets</h2>
+          <h2>Gerenciar Tickets</h2>
         </CardContent>
         <CardContent>
           <MaterialReactTable
@@ -77,7 +73,11 @@ const HistoryTable: React.FC = () => {
             enableEditing
             enableBottomToolbar={false}
             renderRowActions={({ row, table }) => (
-              <SeeFullTicket row={row} table={table} />
+              <TicketTableActions
+                fetchTickets={fetchTickets}
+                row={row}
+                table={table}
+              />
             )}
           />
         </CardContent>
@@ -86,4 +86,4 @@ const HistoryTable: React.FC = () => {
   );
 };
 
-export { HistoryTable };
+export { ManageTicketsTable };

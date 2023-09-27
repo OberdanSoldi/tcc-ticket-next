@@ -1,6 +1,5 @@
 import { EXTERNAL_API_URL } from "@/config/serverEnvScheme";
 import axios, { AxiosError } from "axios";
-import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {

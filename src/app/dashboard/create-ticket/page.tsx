@@ -1,3 +1,4 @@
+"use client";
 import { CreateTicketForm } from "@/components/CreateTicketForm";
 
 const CreateTicket = () => {

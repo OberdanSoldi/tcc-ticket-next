@@ -13,7 +13,7 @@ export const ADMIN_NAVBAR_ITEMS = [
   },
   {
     buttonName: "Gerenciar Usuários",
-    buttonLink: "/dashboard/manage-users",
+    buttonLink: "/",
   },
 ];
 

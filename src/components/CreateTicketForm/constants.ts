@@ -3,15 +3,19 @@ import { InputSelectItems } from "@/domain/InputSelectItems";
 const problemTypes: InputSelectItems[] = [
   {
     name: "Hardware",
-    value: "hardware",
+    value: "HARDWARE",
   },
   {
     name: "Software",
-    value: "software",
+    value: "SOFTWARE",
   },
   {
     name: "Rede",
-    value: "rede",
+    value: "NETWORK",
+  },
+  {
+    name: "Outros",
+    value: "OTHER",
   },
 ];
 
@@ -52,7 +56,7 @@ export const adminFormFields = [
     type: "text",
   },
   {
-    name: "problem",
+    name: "problemType",
     label: "Defina o tipo do problema",
     type: "select",
     options: problemTypes,
@@ -88,7 +92,7 @@ export const userFormFields = [
     type: "text",
   },
   {
-    name: "problem",
+    name: "problemType",
     label: "Defina o tipo do problema",
     type: "select",
     options: problemTypes,

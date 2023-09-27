@@ -1,6 +1,4 @@
-export interface IUserResponse {
-  users: User[];
-}
+export type IUserResponse = IUser[];
 
 export interface IUser {
   id: string;

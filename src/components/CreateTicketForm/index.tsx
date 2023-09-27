@@ -82,6 +82,7 @@ const CreateTicketForm: React.FC = () => {
 
   async function adminOnSubmit(data: CreateTicketAdminForm) {
     try {
+      console.log(data);
       await ticketService.adminCreateTicket(data);
       toastHandler(false, "Ticket criado com sucesso!");
     } catch (e) {

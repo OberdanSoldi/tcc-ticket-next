@@ -1,0 +1,35 @@
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: #202024;
+  color: #fff;
+  box-shadow: 24px;
+  padding: 16px;
+
+  .header {
+    margin-bottom: 20px;
+    text-align: center;
+
+    span {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cancelButton {
+      color: #ff0000;
+    }
+
+    .confirmButton {
+      color: #4cd62b;
+    }
+  }
+}

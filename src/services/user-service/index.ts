@@ -3,21 +3,21 @@
 import { fetchWrapper } from "@/helpers/fetch-wrapper";
 import type { ILoginRequest, ILoginResponse } from "./types";
 import { Ticket } from "@/domain/Ticket";
-import { INTERNAL_API_URL } from "@/config/clientEnvScheme";
+import { EXTERNAL_API_URL } from "@/config/clientEnvScheme";
 import { parseJwt } from "@/helpers/jwt-parse";
 import type { UserRole } from "@/domain/enums/UserRole";
 import type { IUser, IUserResponse } from "@/domain/user/type";
 
 class UserService {
-  private readonly _INTERNAL_API_URL = INTERNAL_API_URL!;
+  private readonly _EXTERNAL_API_URL = EXTERNAL_API_URL!;
 
   async login({ email, password }: ILoginRequest): Promise<void> {
     try {
       const response = await fetchWrapper.post<ILoginResponse, ILoginRequest>(
-        `${this._INTERNAL_API_URL}/api/auth/login`,
+        `${this._EXTERNAL_API_URL}/auth/login`,
         { email: email, password: password }
       );
-      localStorage.setItem("access_token", response.access_token);
+      localStorage.setItem("access_token", `Bearer ${response.access_token}`);
     } catch (ex) {
       throw ex;
     }
@@ -25,7 +25,7 @@ class UserService {
 
   async getUserTickets(): Promise<Ticket[]> {
     const response = await fetchWrapper.get<Ticket[]>(
-      `${this._INTERNAL_API_URL}/api/user/get-user-tickets`
+      `${this._EXTERNAL_API_URL}/user/tickets`
     );
     return response;
   }
@@ -39,9 +39,20 @@ class UserService {
   async getUsers(): Promise<IUser[]> {
     try {
       const data = await fetchWrapper.get<IUserResponse>(
-        `${this._INTERNAL_API_URL}/api/user/get-users`
+        `${this._EXTERNAL_API_URL}/user`
       );
-      return data.users;
+      return data;
+    } catch (ex) {
+      throw ex;
+    }
+  }
+
+  async getUserById(id: string): Promise<IUser> {
+    try {
+      const data = await fetchWrapper.get<IUser>(
+        `${this._EXTERNAL_API_URL}/user/${id}`
+      );
+      return data;
     } catch (ex) {
       throw ex;
     }

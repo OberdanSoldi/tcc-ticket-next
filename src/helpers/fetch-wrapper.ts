@@ -1,3 +1,4 @@
+"use client";
 import type { HttpClient } from "@/domain/HttpClient";
 import { createDefaultConfig } from "@/utils/create-default-config";
 import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";

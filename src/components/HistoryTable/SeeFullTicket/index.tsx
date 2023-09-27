@@ -8,7 +8,7 @@ const SeeFullTicket: React.FC<SeeFullTicketProps> = ({ row, table }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Box sx={{ display: "flex", gap: "1rem" }}>
+    <Box sx={{ display: "flex" }}>
       <Tooltip arrow placement="left" title="Ver ticket completo">
         <IconButton onClick={() => setOpen(true)}>
           <VisibilityIcon sx={{ color: "white" }} />

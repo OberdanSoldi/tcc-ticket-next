@@ -10,6 +10,19 @@ export type IAdminCreateTicketResponse = void;
 export type IUserCreateTicketRequest = CreateTicketUserForm;
 export type IUserCreateTicketResponse = void;
 
-export interface ITicketResponse {
-  response: Ticket[];
-}
+export type ITicketResponse = Ticket[];
+
+export type IUpdateTicketStatusResponse = void;
+export type IUpdateTicketStatusRequest = {
+  status: string;
+};
+
+export type IUpdateTicketPriorityResponse = void;
+export type IUpdateTicketPriorityRequest = {
+  priority: string;
+};
+
+export type IUpdateTicketAssigneeResponse = void;
+export type IUpdateTicketAssigneeRequest = {
+  assignee_id: string;
+};

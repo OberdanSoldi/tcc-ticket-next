@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // output: "export",
+  experimental: {
+    // serverActions: true,
+  },
   env: {
     EXTERNAL_API_URL: process.env.EXTERNAL_API_URL,
     INTERNAL_API_URL: process.env.INTERNAL_API_URL,

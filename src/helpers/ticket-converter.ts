@@ -1,4 +1,5 @@
 import type { Ticket } from "@/domain/Ticket";
+import { userService } from "@/services/user-service";
 import { format } from "date-fns";
 
 class TicketConverter {
@@ -17,7 +18,7 @@ class TicketConverter {
               ...it,
               status: "Fechado",
             };
-          case "inprogress":
+          case "in_progress":
             return {
               ...it,
               status: "Em andamento",
@@ -81,6 +82,5 @@ class TicketConverter {
       });
   }
 }
-
 const ticketConverter = new TicketConverter();
 export { ticketConverter };
