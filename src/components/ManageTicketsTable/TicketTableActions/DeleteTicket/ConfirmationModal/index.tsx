@@ -1,8 +1,9 @@
-import { Box, Button, Grid, Modal } from "@mui/material";
+import { Box, Button, Grid, IconButton, Modal } from "@mui/material";
 import { ConfirmationModalProps } from "./types";
+import CloseIcon from "@mui/icons-material/Close";
+import { ticketService } from "@/services/ticket-service";
 
 import style from "./style.module.scss";
-import { ticketService } from "@/services/ticket-service";
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   fetchTickets,

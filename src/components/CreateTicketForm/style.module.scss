@@ -20,6 +20,10 @@
       align-items: center;
       justify-content: center;
 
+      .problemType {
+        margin-bottom: 28px;
+      }
+
       .item {
         display: flex;
         flex-direction: column;
@@ -39,7 +43,15 @@
             color: #fff;
           }
 
+          textarea {
+            color: #fff;
+          }
+
           label {
+            color: #fff;
+          }
+
+          [id^="description"] {
             color: #fff;
           }
         }

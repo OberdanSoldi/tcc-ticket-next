@@ -1,6 +1,6 @@
 import { InputSelectItems } from "@/domain/InputSelectItems";
 
-const problemTypes: InputSelectItems[] = [
+export const problemTypes: InputSelectItems[] = [
   {
     name: "Hardware",
     value: "HARDWARE",
@@ -19,7 +19,7 @@ const problemTypes: InputSelectItems[] = [
   },
 ];
 
-const priorityTypes: InputSelectItems[] = [
+export const priorityTypes: InputSelectItems[] = [
   {
     name: "Baixa",
     value: "LOW",
@@ -51,37 +51,9 @@ const assigneeTypes: InputSelectItems[] = [
 
 export const adminFormFields = [
   {
-    name: "title",
-    label: "Título",
-    type: "text",
-  },
-  {
-    name: "problemType",
-    label: "Defina o tipo do problema",
-    type: "select",
-    options: problemTypes,
-  },
-  {
-    name: "description",
-    label: "Descrição",
-    type: "text",
-  },
-  {
-    name: "priority",
-    label: "Prioridade",
-    type: "select",
-    options: priorityTypes,
-  },
-  {
     name: "computer_id",
     label: "Máquina",
     type: "text",
-  },
-  {
-    name: "assigned_to",
-    label: "Responsável",
-    type: "select",
-    options: assigneeTypes,
   },
 ];
 

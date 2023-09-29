@@ -1,12 +1,17 @@
 import { Ticket } from "@/domain/Ticket";
 import React from "react";
 import { EditTicketFormValues, EditTicketModalProps } from "./types";
-import { Box, Grid, Modal, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  IconButton,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { SelectField } from "@/components/common/SelectField";
 import { priority, status } from "./constants";
 import { InputSelectItems } from "@/domain/InputSelectItems";
-
-import style from "./style.module.scss";
 import { userService } from "@/services/user-service";
 import { UserRole } from "@/domain/enums/UserRole";
 import { useForm } from "react-hook-form";
@@ -14,7 +19,9 @@ import { LoadingButton } from "@mui/lab";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editFormSchema } from "./schema";
 import { ticketService } from "@/services/ticket-service";
-import { MessageToast } from "@/components/common/MessageToast";
+import CloseIcon from "@mui/icons-material/Close";
+
+import style from "./style.module.scss";
 
 const EditTicketModal: React.FC<EditTicketModalProps> = ({
   open,
@@ -76,33 +83,65 @@ const EditTicketModal: React.FC<EditTicketModalProps> = ({
       >
         <Box className={style.wrapper}>
           <form onSubmit={handleSubmit(submitHandler)}>
-            <Grid container>
-              <Grid item xs={12} md={12}>
-                <SelectField
-                  {...register("priority")}
+            <Grid container spacing={2} className={style.container}>
+              <Grid item xs={12} md={12} className={style.closeButton}>
+                <IconButton onClick={() => setOpen(false)}>
+                  <CloseIcon
+                    sx={{
+                      color: "white",
+                    }}
+                  />
+                </IconButton>
+              </Grid>
+              <Grid item xs={12} md={12} className={style.item}>
+                <TextField
+                  className={style.inputField}
+                  value={ticket.title}
+                  InputProps={{ readOnly: true }}
+                  variant="outlined"
+                  label="Título"
+                  size="small"
                   fullWidth
-                  selectName="priority"
-                  items={priority}
                 />
               </Grid>
-              <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={12} className={style.item}>
                 <SelectField
-                  {...register("status")}
+                  className={style.selectField}
+                  placeholder="Prioridade"
+                  {...register("priority")}
+                  selectName="priority"
+                  items={priority}
                   fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} md={12} className={style.item}>
+                <SelectField
+                  className={style.selectField}
+                  placeholder="Status"
+                  {...register("status")}
                   selectName="status"
+                  label="Status"
                   items={status}
                 />
               </Grid>
-              <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={12} className={style.item}>
                 <SelectField
+                  className={style.selectField}
+                  placeholder="Atribuir para"
                   {...register("assignee")}
                   fullWidth
                   selectName="assignee"
                   items={users}
                 />
               </Grid>
-              <Grid item xs={12} md={12}>
-                <LoadingButton type="submit">Confirmar</LoadingButton>
+              <Grid item xs={12} md={12} className={style.item}>
+                <LoadingButton
+                  className={style.submitButton}
+                  fullWidth
+                  type="submit"
+                >
+                  Confirmar
+                </LoadingButton>
               </Grid>
             </Grid>
           </form>

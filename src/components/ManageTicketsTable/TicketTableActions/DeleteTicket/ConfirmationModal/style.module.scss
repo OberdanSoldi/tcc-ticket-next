@@ -25,11 +25,15 @@
     justify-content: center;
 
     .cancelButton {
-      color: #ff0000;
+      color: #fff;
+      width: 68%;
+      background-color: #e3435a;
     }
 
     .confirmButton {
-      color: #4cd62b;
+      color: #fff;
+      width: 68%;
+      background-color: #50b354;
     }
   }
 }

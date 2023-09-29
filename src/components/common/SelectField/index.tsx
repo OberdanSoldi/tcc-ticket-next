@@ -28,7 +28,7 @@ const InputSelect: React.ForwardRefRenderFunction<
         {isItemsValid &&
           items.map((it, index) => (
             <MenuItem key={index} value={it.value}>
-              {it.name}
+              <span>{it.name}</span>
             </MenuItem>
           ))}
       </Select>
