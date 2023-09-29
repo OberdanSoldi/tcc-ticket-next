@@ -38,25 +38,6 @@ export const priorityTypes: InputSelectItems[] = [
   },
 ];
 
-const assigneeTypes: InputSelectItems[] = [
-  {
-    name: "João",
-    value: "joao",
-  },
-  {
-    name: "Maria",
-    value: "maria",
-  },
-];
-
-export const adminFormFields = [
-  {
-    name: "computer_id",
-    label: "Máquina",
-    type: "text",
-  },
-];
-
 export const userFormFields = [
   {
     name: "title",

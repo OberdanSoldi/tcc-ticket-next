@@ -8,12 +8,7 @@ import { Card, CardContent, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { InputField } from "../common/InputField";
 import { SelectField } from "../common/SelectField";
-import {
-  adminFormFields,
-  priorityTypes,
-  problemTypes,
-  userFormFields,
-} from "./constants";
+import { priorityTypes, problemTypes } from "./constants";
 import { InputSelectItems } from "@/domain/InputSelectItems";
 import { ticketService } from "@/services/ticket-service";
 import { MessageToast } from "../common/MessageToast";
@@ -36,8 +31,6 @@ const CreateTicketForm: React.FC = () => {
   }, []);
 
   const isUserAdmin = userRole === UserRole.ADMIN;
-
-  const formFields = isUserAdmin ? adminFormFields : userFormFields;
 
   const toastHaveErrorMessage = toastMessage.message.length > 0;
 
@@ -159,18 +152,6 @@ const CreateTicketForm: React.FC = () => {
                   fullWidth
                 />
               </Grid>
-              {/* <Grid className={style.item} item xs={12} md={6}></Grid> */}
-              <Grid className={style.item} item xs={12} md={6}>
-                <SelectField
-                  {...register("assigned_to")}
-                  placeholder="Responsável"
-                  className={style.selectField}
-                  selectName="assigned_to"
-                  label="Responsável"
-                  items={users}
-                  size="small"
-                />
-              </Grid>
               <Grid className={style.item} item xs={12} md={6}>
                 <InputField
                   {...register("computer_id")}
@@ -180,6 +161,17 @@ const CreateTicketForm: React.FC = () => {
                   type="text"
                   size="small"
                   fullWidth
+                />
+              </Grid>
+              <Grid className={style.item} item xs={12} md={6}>
+                <SelectField
+                  {...register("assigned_to")}
+                  placeholder="Responsável"
+                  className={style.selectField}
+                  selectName="assigned_to"
+                  label="Responsável"
+                  items={users}
+                  size="small"
                 />
               </Grid>
               <Grid item md={12} xs={12}>
