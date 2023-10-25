@@ -50,7 +50,7 @@ const AcceptInviteForm: React.FC<AcceptInviteFormProps> = ({ inviteId }) => {
       push("/auth/login");
     } catch (ex) {
       toastHandler(true, "Erro ao aceitar convite!");
-      console.log(ex);
+      console.error(ex);
     }
   }
 
