@@ -10,6 +10,14 @@
     margin-bottom: 15px;
     background-color: #202024;
     height: calc(100vh - 106px);
+    width: 1268px;
+
+    [class*="MuiTableBody"] {
+      background-color: #3c3c42;
+      p {
+        color: #fff;
+      }
+    }
 
     h2 {
       color: #fff;

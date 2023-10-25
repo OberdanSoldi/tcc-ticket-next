@@ -1,7 +1,7 @@
 import { Box, Button, Grid, IconButton, Modal } from "@mui/material";
 import { ConfirmationModalProps } from "./types";
-import CloseIcon from "@mui/icons-material/Close";
 import { ticketService } from "@/services/ticket-service";
+import CloseIcon from "@mui/icons-material/Close";
 
 import style from "./style.module.scss";
 

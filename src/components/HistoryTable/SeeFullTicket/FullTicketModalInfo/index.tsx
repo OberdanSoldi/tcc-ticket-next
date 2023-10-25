@@ -2,10 +2,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import type { FullTicketModalInfoProps } from "./types";
-import CloseIcon from "@mui/icons-material/Close";
 import { Grid, IconButton, TextField } from "@mui/material";
 import { userService } from "@/services/user-service";
 import type { IUser } from "@/domain/user/type";
+import CloseIcon from "@mui/icons-material/Close";
 
 import style from "./style.module.scss";
 

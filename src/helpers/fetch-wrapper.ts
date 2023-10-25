@@ -4,6 +4,21 @@ import { createDefaultConfig } from "@/utils/create-default-config";
 import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 
 class FetchWrapper implements HttpClient {
+  constructor() {
+    this.responseInterceptor;
+  }
+
+  private responseInterceptor = axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response.status === 401) {
+        localStorage.removeItem("access_token");
+        window.location.href = "/auth/login";
+      }
+      return Promise.reject(error);
+    }
+  );
+
   async get<T>(
     url: string,
     config?: AxiosRequestConfig | undefined

@@ -51,7 +51,11 @@ class TicketService {
         `${this._EXTERNAL_API_URL}/ticket`
       );
 
+      console.log(data);
+
       const convertedValues = ticketConverter.convertToPortuguese(data);
+
+      console.log(convertedValues);
 
       return convertedValues;
     } catch (ex) {

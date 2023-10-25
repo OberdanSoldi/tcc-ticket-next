@@ -4,24 +4,46 @@ import React from "react";
 import { Card, CardContent } from "@mui/material";
 import type { Ticket } from "@/domain/Ticket";
 import { ticketService } from "@/services/ticket-service";
+import { SeeFullTicket } from "./SeeFullTicket";
+import { getStatusColor } from "@/utils/get-status-color";
+import { userService } from "@/services/user-service";
+import { UserRole } from "@/domain/enums/UserRole";
 
 import style from "./style.module.scss";
-import { SeeFullTicket } from "./SeeFullTicket";
-import axios from "axios";
-import { getStatusColor } from "@/utils/get-status-color";
 
 const HistoryTable: React.FC = () => {
-  const isUserAdmin = true;
+  const [userRole, setUserRole] = React.useState<UserRole>();
   const [tickets, setTickets] = React.useState<Ticket[]>([]);
 
-  async function fetchTickets() {
-    const response = await ticketService.getAllTickets();
-    setTickets(response);
-  }
+  React.useEffect(() => {
+    userService.getUserRole().then((role) => {
+      setUserRole(role);
+    });
+  }, []);
 
   React.useEffect(() => {
-    fetchTickets();
-  }, []);
+    (async () => {
+      switch (userRole) {
+        case UserRole.ADMIN:
+        case UserRole.TECHNICIAN:
+          await fetchAllTickets();
+          break;
+        case UserRole.USER:
+          await fetchUserTickets();
+          break;
+      }
+    })();
+  });
+
+  async function fetchAllTickets() {
+    const tickets = await ticketService.getAllTickets();
+    setTickets(tickets);
+  }
+
+  async function fetchUserTickets() {
+    const tickets = await userService.getTicketsCreatedByUser();
+    setTickets(tickets);
+  }
 
   const adminTableColumns: MRT_ColumnDef<Ticket>[] = [
     {
@@ -57,7 +79,7 @@ const HistoryTable: React.FC = () => {
     },
   ];
 
-  const tableColumns = isUserAdmin ? adminTableColumns : [];
+  const tableColumns = adminTableColumns;
 
   return (
     <div className={style.wrapper}>
@@ -75,7 +97,13 @@ const HistoryTable: React.FC = () => {
             enableFilters={false}
             enableTopToolbar={false}
             enableEditing
+            enableStickyHeader
+            enableStickyFooter
             enableBottomToolbar={false}
+            localization={{
+              noRecordsToDisplay: "Nenhum ticket encontrado",
+            }}
+            muiTableContainerProps={{ sx: { maxHeight: "550px" } }}
             renderRowActions={({ row, table }) => (
               <SeeFullTicket row={row} table={table} />
             )}

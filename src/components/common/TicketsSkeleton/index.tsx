@@ -4,7 +4,7 @@ import style from "./style.module.scss";
 import LogoUnsaturated from "@/../public/logo-unsaturated.png";
 import Image from "next/image";
 
-const NoTicketsSkeleton: React.FC = () => {
+const TicketsSkeleton: React.FC = () => {
   return (
     <div className={style.wrapper}>
       <Image
@@ -14,9 +14,8 @@ const NoTicketsSkeleton: React.FC = () => {
         width={250}
         height={250}
       />
-      <div className={style.noTicketsText}>Não há tickets pendentes...</div>
     </div>
   );
 };
 
-export { NoTicketsSkeleton };
+export { TicketsSkeleton };

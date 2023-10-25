@@ -3,7 +3,6 @@
 import { useSsr } from "@/hooks/useSsr";
 import { isLoggedIn } from "@/utils/is-logged";
 import { useRouter } from "next/navigation";
-
 import style from "./style.module.scss";
 import { NavBar } from "@/components/common/NavBar";
 import React from "react";

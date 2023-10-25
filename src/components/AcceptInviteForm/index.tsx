@@ -10,7 +10,6 @@ import React from "react";
 import { MessageToast } from "../common/MessageToast";
 import { useRouter } from "next/navigation";
 
-import Logo from "@/../public/logo.png";
 import style from "./style.module.scss";
 
 const AcceptInviteForm: React.FC<AcceptInviteFormProps> = ({ inviteId }) => {
@@ -59,7 +58,7 @@ const AcceptInviteForm: React.FC<AcceptInviteFormProps> = ({ inviteId }) => {
     <div className={style.wrapper}>
       <Card className={style.card}>
         <CardContent className={style.cardImage}>
-          <Image src={Logo} alt="Logo" />
+          <h2>Concluir Cadastro</h2>
         </CardContent>
         <CardContent>
           <form onSubmit={handleSubmit(submitHandler)}>

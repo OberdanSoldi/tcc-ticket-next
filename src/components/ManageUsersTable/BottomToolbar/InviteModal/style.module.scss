@@ -1,0 +1,66 @@
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #202024;
+  color: #fff;
+  box-shadow: 24px;
+  padding: 16px;
+  border-radius: 20px;
+  width: 400px;
+
+  .inviteModalHeader {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    [class*="MuiInputLabel-formControl"] {
+      color: #fff;
+    }
+
+    .selectField {
+      background-color: #121214;
+      color: #fff;
+    }
+
+    .inputField {
+      background-color: #121214;
+
+      input {
+        color: #fff;
+      }
+
+      textarea {
+        color: #fff;
+      }
+
+      label {
+        color: #fff;
+      }
+    }
+
+    .submitButton {
+      font-weight: 600;
+      color: #fff;
+      background-color: #8257e6;
+
+      &:hover {
+        background-color: #906de2;
+      }
+
+      &:disabled {
+        color: transparent;
+
+        span {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

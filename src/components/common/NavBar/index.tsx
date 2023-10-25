@@ -7,7 +7,12 @@ import { UserRole } from "@/domain/enums/UserRole";
 
 import style from "./style.module.scss";
 import LogoNoText from "@/../public/logo-no-text.svg";
-import { ADMIN_NAVBAR_ITEMS, USER_NAVBAR_ITEMS } from "./constants";
+import {
+  ADMIN_NAVBAR_ITEMS,
+  TECNICIAN_NAVBAR_ITEMS,
+  USER_NAVBAR_ITEMS,
+} from "./constants";
+import ProfileAvatar from "../ProfileAvatar";
 
 const NavBar: React.FC = () => {
   const [userRole, setUserRole] = React.useState<UserRole>();
@@ -18,9 +23,20 @@ const NavBar: React.FC = () => {
     });
   }, []);
 
-  const isUserAdmin = userRole === UserRole.ADMIN;
+  function handleNavbarOptions() {
+    switch (userRole) {
+      case UserRole.ADMIN:
+        return ADMIN_NAVBAR_ITEMS;
+      case UserRole.USER:
+        return USER_NAVBAR_ITEMS;
+      case UserRole.TECHNICIAN:
+        return TECNICIAN_NAVBAR_ITEMS;
+      default:
+        return [];
+    }
+  }
 
-  const navbarItems = isUserAdmin ? ADMIN_NAVBAR_ITEMS : USER_NAVBAR_ITEMS;
+  const navbarItems = handleNavbarOptions();
 
   return (
     <>
@@ -38,6 +54,7 @@ const NavBar: React.FC = () => {
               </Grid>
             ))}
           </Grid>
+          <ProfileAvatar />
         </Toolbar>
       </AppBar>
     </>

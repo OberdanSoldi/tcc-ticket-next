@@ -1,5 +1,8 @@
+"use client";
+import { TicketsSkeleton } from "@/components/common/TicketsSkeleton";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return <TicketsSkeleton />;
 };
 
 export default Dashboard;

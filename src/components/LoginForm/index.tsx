@@ -34,14 +34,9 @@ const LoginForm: React.FC = () => {
       await userService.login({ email, password });
       router.push("/dashboard");
     } catch (error) {
-      const errorMessage =
-        error instanceof AxiosError
-          ? error.request.statusText
-          : (error as string);
-
       setToastError({
         haveError: true,
-        message: errorMessage,
+        message: "Erro ao fazer login",
       });
     } finally {
       setTimeout(() => {
@@ -82,7 +77,7 @@ const LoginForm: React.FC = () => {
               {...register("password")}
             />
             <a
-              href="/forgot-passwrod"
+              href="/auth/request-reset-password"
               className={`${style.forgotPassword} ${style.spacing}`}
             >
               Esqueceu sua senha?

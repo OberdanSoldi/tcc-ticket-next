@@ -29,6 +29,7 @@ class TicketConverter {
       })
       .map((it) => {
         switch (it.priority.toLowerCase()) {
+          case "not_defined":
           case "low":
             return {
               ...it,

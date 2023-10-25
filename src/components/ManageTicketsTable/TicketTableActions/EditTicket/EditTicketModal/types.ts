@@ -1,7 +1,7 @@
 import type { Ticket } from "@/domain/Ticket";
 import React from "react";
 import { z } from "zod";
-import { editFormSchema } from "./schema";
+import { editFormSchema, editFormTechSchema } from "./schema";
 
 export interface EditTicketModalProps {
   ticket: Ticket;
@@ -12,3 +12,5 @@ export interface EditTicketModalProps {
 }
 
 export type EditTicketFormValues = z.infer<typeof editFormSchema>;
+
+export type EditTicketFormValuesTech = z.infer<typeof editFormTechSchema>;

@@ -1,0 +1,62 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .card {
+    padding: 22px;
+    background-color: #202024;
+  }
+
+  .cardImage {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .spacing {
+      margin-bottom: 22px;
+    }
+
+    .inputField {
+      width: 300px;
+      background-color: #121214;
+
+      input {
+        color: #fff;
+      }
+
+      label {
+        color: #fff;
+      }
+    }
+
+    .loginButton {
+      font-weight: 600;
+      background-color: #8257e6;
+      color: #fff;
+
+      &:active {
+        background-color: #8257e5;
+      }
+
+      &:hover {
+        background-color: #906de2;
+      }
+
+      &:disabled {
+        color: transparent;
+
+        span {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

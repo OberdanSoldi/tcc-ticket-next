@@ -6,4 +6,9 @@ const editFormSchema = z.object({
   assignee: z.string(),
 });
 
-export { editFormSchema };
+const editFormTechSchema = z.object({
+  priority: z.string(),
+  status: z.string(),
+});
+
+export { editFormSchema, editFormTechSchema };

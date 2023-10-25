@@ -1,6 +1,10 @@
 import { Ticket } from "@/domain/Ticket";
 import React from "react";
-import { EditTicketFormValues, EditTicketModalProps } from "./types";
+import {
+  EditTicketFormValues,
+  EditTicketFormValuesTech,
+  EditTicketModalProps,
+} from "./types";
 import {
   Box,
   Grid,
@@ -33,9 +37,7 @@ const EditTicketModal: React.FC<EditTicketModalProps> = ({
   const [users, setUsers] = React.useState<InputSelectItems[]>([]);
   const [userRole, setUserRole] = React.useState<UserRole>();
 
-  const { register, handleSubmit } = useForm<EditTicketFormValues>({
-    resolver: zodResolver(editFormSchema),
-  });
+  const { register, handleSubmit } = useForm();
 
   React.useEffect(() => {
     userService.getUserRole().then((role) => {
@@ -60,7 +62,13 @@ const EditTicketModal: React.FC<EditTicketModalProps> = ({
     }
   }, [isUserAdmin]);
 
-  async function submitHandler(data: EditTicketFormValues) {
+  async function submitHandler(data: unknown) {
+    isUserAdmin
+      ? adminSubmitHandler(data as EditTicketFormValues)
+      : techSubmitHandler(data as EditTicketFormValuesTech);
+  }
+
+  async function adminSubmitHandler(data: EditTicketFormValues) {
     try {
       await ticketService.updateTicketAssignee(ticket.id, data.assignee);
       await ticketService.updateTicketPriority(ticket.id, data.priority);
@@ -72,6 +80,20 @@ const EditTicketModal: React.FC<EditTicketModalProps> = ({
       toastHandler(true, "Erro ao atualizar ticket!");
     }
   }
+
+  async function techSubmitHandler(data: EditTicketFormValuesTech) {
+    try {
+      await ticketService.updateTicketPriority(ticket.id, data.priority);
+      await ticketService.updateTicketStatus(ticket.id, data.status);
+      toastHandler(false, "Ticket atualizado com sucesso!");
+      fetchTickets();
+      setOpen(false);
+    } catch {
+      toastHandler(true, "Erro ao atualizar ticket!");
+    }
+  }
+
+  const shouldRenderAllFields = isUserAdmin;
 
   return (
     <>
@@ -124,16 +146,18 @@ const EditTicketModal: React.FC<EditTicketModalProps> = ({
                   items={status}
                 />
               </Grid>
-              <Grid item xs={12} md={12} className={style.item}>
-                <SelectField
-                  className={style.selectField}
-                  placeholder="Atribuir para"
-                  {...register("assignee")}
-                  fullWidth
-                  selectName="assignee"
-                  items={users}
-                />
-              </Grid>
+              {shouldRenderAllFields && (
+                <Grid item xs={12} md={12} className={style.item}>
+                  <SelectField
+                    className={style.selectField}
+                    placeholder="Atribuir para"
+                    {...register("assignee")}
+                    fullWidth
+                    selectName="assignee"
+                    items={users}
+                  />
+                </Grid>
+              )}
               <Grid item xs={12} md={12} className={style.item}>
                 <LoadingButton
                   className={style.submitButton}

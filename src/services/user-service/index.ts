@@ -7,6 +7,8 @@ import { EXTERNAL_API_URL } from "@/config/clientEnvScheme";
 import { parseJwt } from "@/helpers/jwt-parse";
 import type { UserRole } from "@/domain/enums/UserRole";
 import type { IUser, IUserResponse } from "@/domain/user/type";
+import { userConverter } from "@/helpers/user-converter";
+import { ticketConverter } from "@/helpers/ticket-converter";
 
 class UserService {
   private readonly _EXTERNAL_API_URL = EXTERNAL_API_URL!;
@@ -41,7 +43,8 @@ class UserService {
       const data = await fetchWrapper.get<IUserResponse>(
         `${this._EXTERNAL_API_URL}/user`
       );
-      return data;
+      const convertedData = userConverter.convertToPortuguese(data);
+      return convertedData;
     } catch (ex) {
       throw ex;
     }
@@ -56,6 +59,33 @@ class UserService {
     } catch (ex) {
       throw ex;
     }
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    try {
+      const data = await fetchWrapper.delete<void>(
+        `${this._EXTERNAL_API_URL}/user/${id}`
+      );
+      return data;
+    } catch (ex) {
+      throw ex;
+    }
+  }
+
+  async getTicketsCreatedByUser(): Promise<Ticket[]> {
+    try {
+      const data = await fetchWrapper.get<Ticket[]>(
+        `${this._EXTERNAL_API_URL}/user/tickets`
+      );
+      const convertedValues = ticketConverter.convertToPortuguese(data);
+      return convertedValues;
+    } catch (ex) {
+      throw ex;
+    }
+  }
+
+  logout() {
+    localStorage.removeItem("access_token");
   }
 }
 

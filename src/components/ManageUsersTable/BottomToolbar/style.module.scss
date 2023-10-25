@@ -1,0 +1,23 @@
+.wrapper {
+  height: 46px;
+  display: flex;
+  background: #1b1b1b;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+
+    .inviteUserButton {
+      color: #fff;
+      background: #8257e5;
+      text-transform: capitalize;
+      font-weight: 700;
+
+      &:hover {
+        background-color: #906de2;
+      }
+    }
+  }
+}
