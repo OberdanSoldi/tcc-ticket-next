@@ -1,1 +1,1 @@
-web: npm run build && node .next/standalone/server.js
+web: npm run build && npm start
