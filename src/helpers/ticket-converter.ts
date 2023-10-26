@@ -45,6 +45,11 @@ class TicketConverter {
               ...it,
               priority: "Alta",
             };
+          case "urgent":
+            return {
+              ...it,
+              priority: "Urgente",
+            };
           default:
             return it;
         }

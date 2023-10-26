@@ -24,6 +24,7 @@ const CreateTicketForm: React.FC = () => {
     haveError: false,
     message: "",
   });
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     userService.getUserRole().then((role) => {
@@ -83,12 +84,15 @@ const CreateTicketForm: React.FC = () => {
 
   async function adminOnSubmit(data: CreateTicketAdminForm) {
     try {
+      setLoading(true);
       await ticketService.adminCreateTicket(data);
       toastHandler(false, "Ticket criado com sucesso!");
       push("/dashboard/history");
     } catch (e) {
       toastHandler(true, "Erro ao criar ticket!");
       console.error(e);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -182,6 +186,7 @@ const CreateTicketForm: React.FC = () => {
                   </Grid>
                   <Grid item md={12} xs={12}>
                     <LoadingButton
+                      loading={loading}
                       className={style.submitButton}
                       fullWidth
                       type="submit"
@@ -238,6 +243,7 @@ const CreateTicketForm: React.FC = () => {
                   </Grid>
                   <Grid item md={12} xs={12}>
                     <LoadingButton
+                      loading={loading}
                       className={style.submitButton}
                       fullWidth
                       type="submit"

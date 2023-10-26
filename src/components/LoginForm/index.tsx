@@ -6,7 +6,6 @@ import { userService } from "@/services/user-service";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useRouter } from "next/navigation";
 import { InputField } from "@/components/common/InputField";
-import { AxiosError } from "axios";
 import { Card, CardContent } from "@mui/material";
 import Image from "next/image";
 import { MessageToast } from "../common/MessageToast";
@@ -29,8 +28,11 @@ const LoginForm: React.FC = () => {
     message: "",
   });
 
+  const [loading, setLoading] = React.useState(false);
+
   async function onSubmit({ email, password }: IFormInput) {
     try {
+      setLoading(true);
       await userService.login({ email, password });
       router.push("/dashboard");
     } catch (error) {
@@ -39,6 +41,7 @@ const LoginForm: React.FC = () => {
         message: "Erro ao fazer login",
       });
     } finally {
+      setLoading(false);
       setTimeout(() => {
         setToastError({
           haveError: false,
@@ -83,6 +86,7 @@ const LoginForm: React.FC = () => {
               Esqueceu sua senha?
             </a>
             <LoadingButton
+              loading={loading}
               className={style.loginButton}
               variant="contained"
               type="submit"

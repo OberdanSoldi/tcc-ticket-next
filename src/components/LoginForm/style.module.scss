@@ -69,7 +69,11 @@
         }
 
         &:disabled {
-          background-color: #8257e6;
+          color: transparent;
+
+          span {
+            color: #fff;
+          }
         }
       }
     }
