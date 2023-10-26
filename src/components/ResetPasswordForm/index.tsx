@@ -8,6 +8,7 @@ import { LoadingButton } from "@mui/lab";
 import { passwordService } from "@/services/password-service";
 import { MessageToast } from "../common/MessageToast";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 interface ResetPasswordFormProps {
   requestId: string;
@@ -30,6 +31,8 @@ const ResetPasswordForm = ({ requestId }: ResetPasswordFormProps) => {
       password_confirmation: "",
     },
   };
+
+  const { push } = useRouter();
 
   const {
     register,
@@ -67,6 +70,7 @@ const ResetPasswordForm = ({ requestId }: ResetPasswordFormProps) => {
         data.password_confirmation
       );
       toastHandler(false, "Senha redefinida com sucesso!");
+      push("/auth/login");
     } catch {
       toastHandler(true, "Erro ao redefinir senha!");
     }

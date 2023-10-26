@@ -15,6 +15,7 @@ import { MessageToast } from "../common/MessageToast";
 import type { CreateTicketAdminForm, CreateTicketUserForm } from "./types";
 
 import style from "./style.module.scss";
+import { useRouter } from "next/navigation";
 
 const CreateTicketForm: React.FC = () => {
   const [userRole, setUserRole] = React.useState<UserRole>();
@@ -57,6 +58,8 @@ const CreateTicketForm: React.FC = () => {
     formState: { errors },
   } = useForm();
 
+  const { push } = useRouter();
+
   async function submitHandler(data: unknown) {
     if (isUserAdmin) {
       await adminOnSubmit(data as CreateTicketAdminForm);
@@ -82,6 +85,7 @@ const CreateTicketForm: React.FC = () => {
     try {
       await ticketService.adminCreateTicket(data);
       toastHandler(false, "Ticket criado com sucesso!");
+      push("/dashboard/history");
     } catch (e) {
       toastHandler(true, "Erro ao criar ticket!");
       console.error(e);
