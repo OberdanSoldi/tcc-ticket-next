@@ -1,93 +1,121 @@
 .wrapper {
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: calc(100vh - 70px);
 
   .container {
+    display: flex;
     background-color: #202024;
-    width: 48%;
+    width: 60%;
+    padding-right: 16px;
+    padding-bottom: 16px;
+    border: 1px solid;
+    border-radius: 5px;
 
     .formTitle {
       font-size: 32px;
       color: #e1e1e6;
     }
 
-    .formFieldsContainer {
+    .item {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
 
-      .problemType {
-        margin-bottom: 28px;
+      .fieldLabel {
+        padding-bottom: 4px;
+        font-size: 16px;
+        color: #e1e1e6;
       }
 
-      .item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 40%;
+      .inputField {
+        background-color: #121214;
 
-        .fieldLabel {
-          padding-bottom: 4px;
-          font-size: 16px;
-          color: #e1e1e6;
+        input {
+          color: #fff;
         }
 
-        .inputField {
-          background-color: #121214;
-
-          input {
-            color: #fff;
-          }
-
-          textarea {
-            color: #fff;
-          }
-
-          label {
-            color: #fff;
-          }
-
-          [id^="description"] {
-            color: #fff;
-          }
+        textarea {
+          color: #fff;
         }
 
-        [id^="problem"],
-        [id^="priority"],
-        [id^="assigned_to"] {
-          background-color: #121214;
+        label {
+          color: #fff;
+        }
+
+        [id^="description"] {
           color: #fff;
         }
       }
 
-      [class^="MuiSvgIcon-root"] {
-        fill: #fff;
+      [id^="problem"],
+      [id^="priority"],
+      [id^="assigned_to"] {
+        background-color: #121214;
+        color: #fff;
+      }
+    }
+
+    [class^="MuiSvgIcon-root"] {
+      fill: #fff;
+    }
+
+    .submitButton {
+      font-weight: 600;
+      color: #fff;
+      background-color: #8257e6;
+
+      &:active {
+        background-color: #8257e5;
       }
 
-      .submitButton {
-        font-weight: 600;
-        color: #fff;
-        background-color: #8257e6;
+      &:hover {
+        background-color: #906de2;
+      }
 
-        &:active {
-          background-color: #8257e5;
+      &:disabled {
+        color: transparent;
+
+        span {
+          color: #fff;
         }
+      }
+    }
+  }
+}
 
-        &:hover {
-          background-color: #906de2;
+@media (max-width: 768px) {
+  .wrapper {
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: calc(100vh - 120px);
+      width: 90%;
+      margin: 0;
+      flex-wrap: nowrap;
+      border: 1px solid;
+      border-radius: 5px;
+
+      .problemType {
+        margin-bottom: 0;
+      }
+
+      .item {
+        padding-top: 0;
+        padding-right: 16px;
+
+        .submitButton {
+          padding-right: 16px;
         }
+      }
 
-        &:disabled {
-          color: transparent;
-
-          span {
-            color: #fff;
-          }
-        }
+      form {
+        margin: 20px;
+        width: 80%;
       }
     }
   }

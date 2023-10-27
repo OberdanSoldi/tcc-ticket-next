@@ -4,7 +4,7 @@ import React from "react";
 import { UserRole } from "@/domain/enums/UserRole";
 import { userService } from "@/services/user-service";
 import { LoadingButton } from "@mui/lab";
-import { Card, CardContent, Grid } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { InputField } from "../common/InputField";
 import { SelectField } from "../common/SelectField";
@@ -107,156 +107,154 @@ const CreateTicketForm: React.FC = () => {
   }
 
   return (
-    <div className={style.wrapper}>
-      <Card className={style.container}>
-        <CardContent className={style.formFieldsContainer}>
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <Grid container spacing={2}>
-              <Grid item md={12} xs={12}>
-                <span className={style.formTitle}>Criar Ticket</span>
-              </Grid>
-              {isUserAdmin ? (
-                <>
-                  <Grid className={style.item} item xs={12} md={12}>
-                    <InputField
-                      {...register("title")}
-                      inputName="title"
-                      className={style.inputField}
-                      label="Título"
-                      type="text"
-                      size="small"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid className={style.item} item xs={12} md={6}>
-                    <InputField
-                      {...register("description")}
-                      inputName="description"
-                      className={style.inputField}
-                      label="Descrição"
-                      type="text"
-                      size="small"
-                      multiline
-                      rows={4}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid className={style.item} item xs={12} md={6}>
-                    <SelectField
-                      {...register("problemType")}
-                      placeholder="Defina o tipo do problema"
-                      className={`${style.selectField} ${style.problemType}`}
-                      selectName="problemType"
-                      label="Defina o tipo do problema"
-                      items={problemTypes}
-                      size="small"
-                    />
-                    <SelectField
-                      {...register("priority")}
-                      placeholder="Prioridade"
-                      className={style.selectField}
-                      selectName="priority"
-                      label="Prioridade"
-                      items={priorityTypes}
-                      size="small"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid className={style.item} item xs={12} md={6}>
-                    <InputField
-                      {...register("computer_id")}
-                      inputName="computer_id"
-                      className={style.inputField}
-                      label="Máquina"
-                      type="text"
-                      size="small"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid className={style.item} item xs={12} md={6}>
-                    <SelectField
-                      {...register("assigned_to")}
-                      placeholder="Responsável"
-                      className={style.selectField}
-                      selectName="assigned_to"
-                      label="Responsável"
-                      items={users}
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item md={12} xs={12}>
-                    <LoadingButton
-                      loading={loading}
-                      className={style.submitButton}
-                      fullWidth
-                      type="submit"
-                    >
-                      Enviar
-                    </LoadingButton>
-                  </Grid>
-                </>
-              ) : (
-                <>
-                  <Grid className={style.item} item xs={12} md={12}>
-                    <InputField
-                      {...register("title")}
-                      inputName="title"
-                      className={style.inputField}
-                      label="Título"
-                      type="text"
-                      size="small"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid className={style.item} item xs={12} md={6}>
-                    <InputField
-                      {...register("description")}
-                      inputName="description"
-                      className={style.inputField}
-                      label="Descrição"
-                      type="text"
-                      size="small"
-                      multiline
-                      rows={4}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid className={style.item} item xs={12} md={6}>
-                    <SelectField
-                      {...register("problemType")}
-                      placeholder="Defina o tipo do problema"
-                      className={`${style.selectField} ${style.problemType}`}
-                      selectName="problemType"
-                      label="Defina o tipo do problema"
-                      items={problemTypes}
-                      size="small"
-                    />
-                    <InputField
-                      {...register("computer_id")}
-                      inputName="computer_id"
-                      className={style.inputField}
-                      label="Máquina"
-                      type="text"
-                      size="small"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item md={12} xs={12}>
-                    <LoadingButton
-                      loading={loading}
-                      className={style.submitButton}
-                      fullWidth
-                      type="submit"
-                    >
-                      Enviar
-                    </LoadingButton>
-                  </Grid>
-                </>
-              )}
+    <form className={style.wrapper} onSubmit={handleSubmit(submitHandler)}>
+      <Grid container spacing={2} className={style.container}>
+        <Grid className={style.title} item md={12} xs={12}>
+          <Typography variant="h2" className={style.formTitle}>
+            Criar Ticket
+          </Typography>
+        </Grid>
+        {/* {isUserAdmin ? (
+          <> */}
+        <Grid className={style.item} item xs={12} md={12}>
+          <InputField
+            {...register("title")}
+            inputName="title"
+            className={style.inputField}
+            label="Título"
+            type="text"
+            size="small"
+            fullWidth
+          />
+        </Grid>
+        <Grid className={style.item} item xs={12} md={12} xl={12}>
+          <InputField
+            {...register("description")}
+            inputName="description"
+            className={style.inputField}
+            label="Descrição"
+            type="text"
+            size="small"
+            multiline
+            rows={4}
+            fullWidth
+          />
+        </Grid>
+        <Grid className={style.item} item xs={12} md={6} xl={6}>
+          <SelectField
+            {...register("problemType")}
+            placeholder="Defina o tipo do problema"
+            className={`${style.selectField} ${style.problemType}`}
+            selectName="problemType"
+            label="Defina o tipo do problema"
+            items={problemTypes}
+            size="small"
+          />
+        </Grid>
+        <Grid className={style.item} item xs={12} md={6} xl={6}>
+          <SelectField
+            {...register("priority")}
+            placeholder="Prioridade"
+            className={style.selectField}
+            selectName="priority"
+            label="Prioridade"
+            items={priorityTypes}
+            size="small"
+            fullWidth
+          />
+        </Grid>
+        <Grid className={style.item} item xs={12} md={6} xl={6}>
+          <InputField
+            {...register("computer_id")}
+            inputName="computer_id"
+            className={style.inputField}
+            label="Máquina"
+            type="text"
+            size="small"
+            fullWidth
+          />
+        </Grid>
+        <Grid className={style.item} item xs={12} md={6} xl={6}>
+          <SelectField
+            {...register("assigned_to")}
+            placeholder="Responsável"
+            className={style.selectField}
+            selectName="assigned_to"
+            label="Responsável"
+            items={users}
+            size="small"
+          />
+        </Grid>
+        <Grid className={style.item} item md={12} xs={12}>
+          <LoadingButton
+            loading={loading}
+            className={style.submitButton}
+            fullWidth
+            type="submit"
+          >
+            Enviar
+          </LoadingButton>
+        </Grid>
+        {/* </> */}
+        {/* ) : (
+          <>
+            <Grid className={style.item} item xs={12} md={12}>
+              <InputField
+                {...register("title")}
+                inputName="title"
+                className={style.inputField}
+                label="Título"
+                type="text"
+                size="small"
+                fullWidth
+              />
             </Grid>
-          </form>
-        </CardContent>
-      </Card>
+            <Grid className={style.item} item xs={12} md={6} xl={6}>
+              <InputField
+                {...register("description")}
+                inputName="description"
+                className={style.inputField}
+                label="Descrição"
+                type="text"
+                size="small"
+                multiline
+                rows={4}
+                fullWidth
+              />
+            </Grid>
+            <Grid className={style.item} item xs={12} md={6} xl={6}>
+              <SelectField
+                {...register("problemType")}
+                placeholder="Defina o tipo do problema"
+                className={`${style.selectField} ${style.problemType}`}
+                selectName="problemType"
+                label="Defina o tipo do problema"
+                items={problemTypes}
+                size="small"
+              />
+              <InputField
+                {...register("computer_id")}
+                inputName="computer_id"
+                className={style.inputField}
+                label="Máquina"
+                type="text"
+                size="small"
+                fullWidth
+              />
+            </Grid>
+            <Grid item md={12} xs={12} xl={6}>
+              <LoadingButton
+                loading={loading}
+                className={style.submitButton}
+                fullWidth
+                type="submit"
+              >
+                Enviar
+              </LoadingButton>
+            </Grid>
+          </>
+        )} */}
+      </Grid>
       {toastHaveErrorMessage && (
         <MessageToast
           open={toastHaveErrorMessage}
@@ -265,7 +263,7 @@ const CreateTicketForm: React.FC = () => {
           messageText={toastMessage.message}
         />
       )}
-    </div>
+    </form>
   );
 };
 

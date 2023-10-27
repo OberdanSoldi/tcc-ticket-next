@@ -36,7 +36,8 @@ const NavBar: React.FC = () => {
     }
   }
 
-  const navbarItems = handleNavbarOptions();
+  // const navbarItems = handleNavbarOptions();
+  const navbarItems = [] as any;
 
   return (
     <>
@@ -44,7 +45,7 @@ const NavBar: React.FC = () => {
         <Toolbar disableGutters className={style.navBar}>
           <Image src={LogoNoText} alt="Logo" width={75} height={75} />
           <Grid container gap={6} justifyContent={"center"}>
-            {navbarItems.map((it, index) => (
+            {navbarItems.map((it: any, index: any) => (
               <Grid className={style.navItem} item key={index}>
                 <Button className={style.navButton}>
                   <Link className={style.buttonLink} href={it.buttonLink}>
