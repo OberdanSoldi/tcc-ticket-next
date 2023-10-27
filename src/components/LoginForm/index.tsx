@@ -6,7 +6,7 @@ import { userService } from "@/services/user-service";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useRouter } from "next/navigation";
 import { InputField } from "@/components/common/InputField";
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, Grid } from "@mui/material";
 import Image from "next/image";
 import { MessageToast } from "../common/MessageToast";
 import React from "react";
@@ -52,59 +52,64 @@ const LoginForm: React.FC = () => {
   }
 
   return (
-    <div className={style.wrapper}>
-      <Card className={style.card}>
-        <CardContent className={style.cardImage}>
+    <form className={style.wrapper} onSubmit={handleSubmit(onSubmit)}>
+      <Grid className={style.container} container gap={3}>
+        <Grid className={style.item} item xs={12} md={12}>
           <Image src={Logo} alt="Logo" />
-        </CardContent>
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <InputField
-              inputName="email"
-              label="Email"
-              size="small"
-              className={`${style.inputField} ${style.spacing}`}
-              type="text"
-              helperText={errors.email?.message}
-              error={!!errors.email}
-              {...register("email")}
-            />
-            <InputField
-              inputName="password"
-              label="Password"
-              size="small"
-              className={style.inputField}
-              type="password"
-              helperText={errors.password?.message}
-              error={!!errors.password}
-              {...register("password")}
-            />
-            <a
-              href="/auth/request-reset-password"
-              className={`${style.forgotPassword} ${style.spacing}`}
-            >
-              Esqueceu sua senha?
-            </a>
-            <LoadingButton
-              loading={loading}
-              className={style.loginButton}
-              variant="contained"
-              type="submit"
-            >
-              Login
-            </LoadingButton>
-          </form>
-          {toastError.haveError && (
-            <MessageToast
-              open={toastError.haveError}
-              handleClose={() => {}}
-              severity="error"
-              messageText={toastError.message}
-            />
-          )}
-        </CardContent>
-      </Card>
-    </div>
+        </Grid>
+        <Grid className={style.item} item xs={12} md={12}>
+          <InputField
+            inputName="email"
+            label="Email"
+            size="small"
+            className={`${style.inputField} ${style.spacing}`}
+            type="text"
+            helperText={errors.email?.message}
+            error={!!errors.email}
+            {...register("email")}
+            fullWidth
+          />
+        </Grid>
+        <Grid className={`${style.item} ${style.fgPass}`} item xs={12} md={12}>
+          <InputField
+            inputName="password"
+            label="Password"
+            size="small"
+            className={style.inputField}
+            type="password"
+            helperText={errors.password?.message}
+            error={!!errors.password}
+            {...register("password")}
+            fullWidth
+          />
+          <a
+            href="/auth/request-reset-password"
+            className={`${style.forgotPassword} ${style.spacing}`}
+          >
+            Esqueceu sua senha?
+          </a>
+        </Grid>
+        <Grid className={style.item} item xs={12} md={12}>
+          <LoadingButton
+            loading={loading}
+            className={style.loginButton}
+            variant="contained"
+            type="submit"
+            fullWidth
+          >
+            Login
+          </LoadingButton>
+        </Grid>
+      </Grid>
+      {toastError.haveError && (
+        <MessageToast
+          open={toastError.haveError}
+          handleClose={() => {}}
+          severity="error"
+          messageText={toastError.message}
+        />
+      )}
+    </form>
   );
 };
 

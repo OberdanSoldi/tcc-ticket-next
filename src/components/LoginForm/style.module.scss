@@ -4,21 +4,22 @@
   align-items: center;
   height: 100vh;
 
-  .card {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     padding: 22px;
     background-color: #202024;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 25%;
 
-    .cardImage {
+    .item {
       display: flex;
       justify-content: center;
-    }
 
-    form {
-      display: flex;
-      flex-direction: column;
-
-      .spacing {
-        margin-bottom: 22px;
+      &.fgPass {
+        flex-direction: column;
       }
 
       .inputField {
@@ -76,6 +77,28 @@
           }
         }
       }
+    }
+
+    .cardImage {
+      display: flex;
+      justify-content: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .spacing {
+        margin-bottom: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    .container {
+      width: 90%;
     }
   }
 }
