@@ -97,6 +97,7 @@ const HistoryTable: React.FC = () => {
             data={tickets}
             enableColumnActions={false}
             enableColumnFilters={false}
+            enablePagination={false}
             enableSorting={false}
             enableFilters={false}
             enableTopToolbar={false}
@@ -107,7 +108,7 @@ const HistoryTable: React.FC = () => {
             localization={{
               noRecordsToDisplay: "Nenhum ticket encontrado",
             }}
-            // muiTableContainerProps={{ sx: { maxHeight: "550px" } }}
+            muiTableContainerProps={{ sx: { maxHeight: "550px" } }}
             renderRowActions={({ row, table }) => (
               <SeeFullTicket row={row} table={table} />
             )}
