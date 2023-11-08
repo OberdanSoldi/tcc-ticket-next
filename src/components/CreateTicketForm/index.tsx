@@ -55,7 +55,7 @@ const CreateTicketForm: React.FC = () => {
         setUsers(users.filter((it) => it.role === "Técnico"));
       })();
     }
-  }, []);
+  }, [userRole]);
 
   const {
     register,
