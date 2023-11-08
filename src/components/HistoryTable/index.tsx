@@ -107,7 +107,7 @@ const HistoryTable: React.FC = () => {
             localization={{
               noRecordsToDisplay: "Nenhum ticket encontrado",
             }}
-            muiTableContainerProps={{ sx: { maxHeight: "550px" } }}
+            // muiTableContainerProps={{ sx: { maxHeight: "550px" } }}
             renderRowActions={({ row, table }) => (
               <SeeFullTicket row={row} table={table} />
             )}
