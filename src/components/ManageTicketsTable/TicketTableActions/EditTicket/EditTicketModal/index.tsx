@@ -20,8 +20,6 @@ import { userService } from "@/services/user-service";
 import { UserRole } from "@/domain/enums/UserRole";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { editFormSchema } from "./schema";
 import { ticketService } from "@/services/ticket-service";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -47,20 +45,24 @@ const EditTicketModal: React.FC<EditTicketModalProps> = ({
 
   const isUserAdmin = userRole === UserRole.ADMIN;
 
+  const isUserTechnician = userRole === UserRole.TECHNICIAN;
+
   React.useEffect(() => {
-    if (isUserAdmin) {
+    if (isUserAdmin || isUserTechnician) {
       (async () => {
         const data = await userService.getUsers();
         const users = data.map((it) => {
           return {
             name: it.name,
             value: it.id,
+            role: it.role,
           };
         });
-        setUsers(users);
+
+        setUsers(users.filter((it) => it.role === "Técnico"));
       })();
     }
-  }, [isUserAdmin]);
+  }, []);
 
   async function submitHandler(data: unknown) {
     isUserAdmin

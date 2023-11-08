@@ -22,18 +22,22 @@ const HistoryTable: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    (async () => {
-      switch (userRole) {
-        case UserRole.ADMIN:
-        case UserRole.TECHNICIAN:
-          await fetchAllTickets();
-          break;
-        case UserRole.USER:
-          await fetchUserTickets();
-          break;
-      }
-    })();
-  });
+    if (userRole !== undefined) {
+      (async () => {
+        switch (userRole) {
+          case UserRole.ADMIN:
+          case UserRole.TECHNICIAN:
+            await fetchAllTickets();
+            break;
+          case UserRole.USER:
+            await fetchUserTickets();
+            break;
+          default:
+            return;
+        }
+      })();
+    }
+  }, [userRole]);
 
   async function fetchAllTickets() {
     const tickets = await ticketService.getAllTickets();

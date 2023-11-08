@@ -23,7 +23,7 @@
       }
 
       .inputField {
-        width: 300px;
+        //width: 300px;
         background-color: #121214;
 
         [id^="email-helper-text"],
@@ -99,6 +99,10 @@
   .wrapper {
     .container {
       width: 90%;
+
+      .item {
+        width: 85%;
+      }
     }
   }
 }

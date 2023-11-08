@@ -4,7 +4,7 @@ import React from "react";
 import { UserRole } from "@/domain/enums/UserRole";
 import { userService } from "@/services/user-service";
 import { LoadingButton } from "@mui/lab";
-import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { InputField } from "../common/InputField";
 import { SelectField } from "../common/SelectField";
@@ -34,24 +34,28 @@ const CreateTicketForm: React.FC = () => {
 
   const isUserAdmin = userRole === UserRole.ADMIN;
 
+  const isUserTechnician = userRole === UserRole.TECHNICIAN;
+
   const toastHaveErrorMessage = toastMessage.message.length > 0;
 
   const toastSeverity = toastMessage.haveError ? "error" : "success";
 
   React.useEffect(() => {
-    if (isUserAdmin) {
+    if (isUserAdmin || isUserTechnician) {
       (async () => {
         const data = await userService.getUsers();
         const users = data.map((it) => {
           return {
             name: it.name,
             value: it.id,
+            role: it.role,
           };
         });
-        setUsers(users);
+
+        setUsers(users.filter((it) => it.role === "Técnico"));
       })();
     }
-  }, [isUserAdmin]);
+  }, []);
 
   const {
     register,
@@ -100,11 +104,14 @@ const CreateTicketForm: React.FC = () => {
     try {
       await ticketService.userCreateTicket(data);
       toastHandler(false, "Ticket criado com sucesso!");
+      push("/dashboard/history");
     } catch (e) {
       toastHandler(true, "Erro ao criar ticket!");
       console.error(e);
     }
   }
+
+  const shouldRenderAssigneeField = userRole === UserRole.ADMIN;
 
   return (
     <form className={style.wrapper} onSubmit={handleSubmit(submitHandler)}>
@@ -114,8 +121,6 @@ const CreateTicketForm: React.FC = () => {
             Criar Ticket
           </Typography>
         </Grid>
-        {/* {isUserAdmin ? (
-          <> */}
         <Grid className={style.item} item xs={12} md={12}>
           <InputField
             {...register("title")}
@@ -174,17 +179,19 @@ const CreateTicketForm: React.FC = () => {
             fullWidth
           />
         </Grid>
-        <Grid className={style.item} item xs={12} md={6} xl={6}>
-          <SelectField
-            {...register("assigned_to")}
-            placeholder="Responsável"
-            className={style.selectField}
-            selectName="assigned_to"
-            label="Responsável"
-            items={users}
-            size="small"
-          />
-        </Grid>
+        {shouldRenderAssigneeField && (
+          <Grid className={style.item} item xs={12} md={6} xl={6}>
+            <SelectField
+              {...register("assigned_to")}
+              placeholder="Responsável"
+              className={style.selectField}
+              selectName="assigned_to"
+              label="Responsável"
+              items={users}
+              size="small"
+            />
+          </Grid>
+        )}
         <Grid className={style.item} item md={12} xs={12}>
           <LoadingButton
             loading={loading}
@@ -195,65 +202,6 @@ const CreateTicketForm: React.FC = () => {
             Enviar
           </LoadingButton>
         </Grid>
-        {/* </> */}
-        {/* ) : (
-          <>
-            <Grid className={style.item} item xs={12} md={12}>
-              <InputField
-                {...register("title")}
-                inputName="title"
-                className={style.inputField}
-                label="Título"
-                type="text"
-                size="small"
-                fullWidth
-              />
-            </Grid>
-            <Grid className={style.item} item xs={12} md={6} xl={6}>
-              <InputField
-                {...register("description")}
-                inputName="description"
-                className={style.inputField}
-                label="Descrição"
-                type="text"
-                size="small"
-                multiline
-                rows={4}
-                fullWidth
-              />
-            </Grid>
-            <Grid className={style.item} item xs={12} md={6} xl={6}>
-              <SelectField
-                {...register("problemType")}
-                placeholder="Defina o tipo do problema"
-                className={`${style.selectField} ${style.problemType}`}
-                selectName="problemType"
-                label="Defina o tipo do problema"
-                items={problemTypes}
-                size="small"
-              />
-              <InputField
-                {...register("computer_id")}
-                inputName="computer_id"
-                className={style.inputField}
-                label="Máquina"
-                type="text"
-                size="small"
-                fullWidth
-              />
-            </Grid>
-            <Grid item md={12} xs={12} xl={6}>
-              <LoadingButton
-                loading={loading}
-                className={style.submitButton}
-                fullWidth
-                type="submit"
-              >
-                Enviar
-              </LoadingButton>
-            </Grid>
-          </>
-        )} */}
       </Grid>
       {toastHaveErrorMessage && (
         <MessageToast

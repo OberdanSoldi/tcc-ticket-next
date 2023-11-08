@@ -20,17 +20,11 @@ const TicketTableActions: React.FC<TicketTableActionsProps> = ({
     });
   }, []);
 
-  const isUserAdmin = userRole === UserRole.ADMIN;
-
-  const shouldRenderDeleteButton = isUserAdmin;
-
   return (
     <Box sx={{ display: "flex", gap: "1rem" }}>
       <SeeFullTicket row={row} table={table} />
       <EditTicket fetchTickets={fetchTickets} row={row} table={table} />
-      {shouldRenderDeleteButton && (
-        <DeleteTicket fetchTickets={fetchTickets} row={row} table={table} />
-      )}
+      <DeleteTicket fetchTickets={fetchTickets} row={row} table={table} />
     </Box>
   );
 };

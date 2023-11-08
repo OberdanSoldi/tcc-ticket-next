@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import style from "./style.module.scss";
 import { InputField } from "../common/InputField";
 import { useForm } from "react-hook-form";
@@ -77,48 +77,88 @@ const ResetPasswordForm = ({ requestId }: ResetPasswordFormProps) => {
   }
 
   return (
-    <div className={style.wrapper}>
-      <Card className={style.card}>
-        <CardContent className={style.cardImage}>
-          <h2>Redefinição de senha</h2>
-        </CardContent>
-        <CardContent>
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <InputField
-              inputName="password"
-              label="Nova senha"
-              type="password"
-              helperText={errors.password?.message}
-              className={`${style.inputField} ${style.spacing}`}
-              error={!!errors.password}
-              {...register("password")}
-              size="small"
-            />
-            <InputField
-              inputName="password_confirmation"
-              label="Confirmação de senha"
-              type="password"
-              helperText={errors.password_confirmation?.message}
-              className={`${style.inputField} ${style.spacing}`}
-              error={!!errors.password_confirmation}
-              {...register("password_confirmation")}
-              size="small"
-            />
-            <LoadingButton className={style.loginButton} type="submit">
-              Redefinir
-            </LoadingButton>
-          </form>
-        </CardContent>
-      </Card>
-      {toastHaveErrorMessage && (
-        <MessageToast
-          open={toastHaveErrorMessage}
-          handleClose={() => {}}
-          severity={toastSeverity}
-          messageText={toastMessage.message}
-        />
-      )}
-    </div>
+    // <div className={style.wrapper}>
+    <form className={style.wrapper} onSubmit={handleSubmit(submitHandler)}>
+      <Grid className={style.container} container gap={3}>
+        <Grid className={style.item} item xs={12} md={12}>
+          <Typography className={style.cardHeader} variant="h2" component="h2">
+            Redefinição de senha
+          </Typography>
+        </Grid>
+        <Grid className={style.item} item xs={12} md={12}>
+          <InputField
+            inputName="password"
+            label="Nova senha"
+            type="password"
+            helperText={errors.password?.message}
+            className={`${style.inputField} ${style.spacing}`}
+            error={!!errors.password}
+            {...register("password")}
+            size="small"
+            fullWidth
+          />
+        </Grid>
+        <Grid className={style.item} item xs={12} md={12}>
+          <InputField
+            inputName="password_confirmation"
+            label="Confirmação de senha"
+            type="password"
+            helperText={errors.password_confirmation?.message}
+            className={`${style.inputField} ${style.spacing}`}
+            error={!!errors.password_confirmation}
+            {...register("password_confirmation")}
+            size="small"
+            fullWidth
+          />
+        </Grid>
+        <Grid className={style.item} item xs={12} md={12}>
+          <LoadingButton fullWidth className={style.loginButton} type="submit">
+            Redefinir
+          </LoadingButton>
+        </Grid>
+      </Grid>
+    </form>
+    //   <Card className={style.card}>
+    //     <CardContent className={style.cardImage}>
+    //       <h2>Redefinição de senha</h2>
+    //     </CardContent>
+    //     <CardContent>
+    //       <form onSubmit={handleSubmit(submitHandler)}>
+    //         <InputField
+    //           inputName="password"
+    //           label="Nova senha"
+    //           type="password"
+    //           helperText={errors.password?.message}
+    //           className={`${style.inputField} ${style.spacing}`}
+    //           error={!!errors.password}
+    //           {...register("password")}
+    //           size="small"
+    //         />
+    //         <InputField
+    //           inputName="password_confirmation"
+    //           label="Confirmação de senha"
+    //           type="password"
+    //           helperText={errors.password_confirmation?.message}
+    //           className={`${style.inputField} ${style.spacing}`}
+    //           error={!!errors.password_confirmation}
+    //           {...register("password_confirmation")}
+    //           size="small"
+    //         />
+    //         <LoadingButton className={style.loginButton} type="submit">
+    //           Redefinir
+    //         </LoadingButton>
+    //       </form>
+    //     </CardContent>
+    //   </Card>
+    //   {toastHaveErrorMessage && (
+    //     <MessageToast
+    //       open={toastHaveErrorMessage}
+    //       handleClose={() => {}}
+    //       severity={toastSeverity}
+    //       messageText={toastMessage.message}
+    //     />
+    //   )}
+    // </div>
   );
 };
 

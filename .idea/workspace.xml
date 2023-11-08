@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="747cc1e5-fe3e-4381-8fcb-c7f6c5bcdf67" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user-service/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user-service/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CreateTicketForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CreateTicketForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LoginForm/style.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm/style.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ManageTicketsTable/TicketTableActions/EditTicket/EditTicketModal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ManageTicketsTable/TicketTableActions/EditTicket/EditTicketModal/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ManageTicketsTable/TicketTableActions/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ManageTicketsTable/TicketTableActions/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ResetPasswordForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPasswordForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ResetPasswordForm/style.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetPasswordForm/style.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/NavBar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/NavBar/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,10 +25,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2UztKSA2aPZmdeXDTrA6fMoxLt7" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -35,8 +41,11 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/oberdansoldi/workspace/tcc/tcc-ticket-next/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -49,6 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1693954173938</updated>
       <workItem from="1693954178647" duration="22000" />
+      <workItem from="1699267889550" duration="4632000" />
     </task>
     <servers />
   </component>

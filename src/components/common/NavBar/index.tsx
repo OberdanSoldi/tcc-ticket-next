@@ -36,8 +36,8 @@ const NavBar: React.FC = () => {
     }
   }
 
-  // const navbarItems = handleNavbarOptions();
-  const navbarItems = [] as any;
+  const navbarItems = handleNavbarOptions();
+  // const navbarItems = [] as any;
 
   return (
     <>

@@ -4,59 +4,76 @@
   align-items: center;
   height: 100vh;
 
-  .card {
-    padding: 22px;
+  .container {
     background-color: #202024;
-  }
-
-  .cardImage {
-    display: flex;
-    justify-content: center;
-    color: #fff;
-    font-size: 16px;
-  }
-
-  form {
+    border: 1px solid;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
+    align-content: center;
+    width: 26%;
+    padding-top: 16px;
+    padding-bottom: 16px;
 
-    .spacing {
-      margin-bottom: 22px;
-    }
-
-    .inputField {
-      width: 300px;
-      background-color: #121214;
-
-      input {
+    .item {
+      .cardHeader {
+        text-align: center;
         color: #fff;
+        font-size: 29px;
+        font-weight: bold;
       }
 
-      label {
-        color: #fff;
-      }
-    }
+      .inputField {
+        width: 300px;
+        background-color: #121214;
 
-    .loginButton {
-      font-weight: 600;
-      background-color: #8257e6;
-      color: #fff;
+        input {
+          color: #fff;
+        }
 
-      &:active {
-        background-color: #8257e5;
-      }
-
-      &:hover {
-        background-color: #906de2;
-      }
-
-      &:disabled {
-        color: transparent;
-
-        span {
+        label {
           color: #fff;
         }
       }
+
+      .loginButton {
+        font-weight: 600;
+        background-color: #8257e6;
+        color: #fff;
+
+        &:active {
+          background-color: #8257e5;
+        }
+
+        &:hover {
+          background-color: #906de2;
+        }
+
+        &:disabled {
+          color: transparent;
+
+          span {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .spacing {
+        margin-bottom: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    .container {
+      width: 80%;
     }
   }
 }
