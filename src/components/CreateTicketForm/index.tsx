@@ -52,7 +52,11 @@ const CreateTicketForm: React.FC = () => {
           };
         });
 
-        setUsers(users.filter((it) => it.role === "Técnico"));
+        setUsers(
+          users.filter(
+            (it) => it.role === "Técnico" || it.role === "Administrador"
+          )
+        );
       })();
     }
   }, [userRole]);
