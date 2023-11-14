@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SDM",
   description: "SDM",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export const dynamic = "force-dynamic";
