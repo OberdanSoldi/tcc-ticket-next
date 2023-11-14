@@ -59,7 +59,11 @@ const EditTicketModal: React.FC<EditTicketModalProps> = ({
           };
         });
 
-        setUsers(users.filter((it) => it.role === "Técnico"));
+        setUsers(
+          users.filter(
+            (it) => it.role === "Técnico" || it.role === "Administrador"
+          )
+        );
       })();
     }
   }, []);
