@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   justify-content: space-between;
+  height: 100%;
 
   .titles {
     text-align: center;
@@ -19,6 +20,7 @@
   .goToLoginButton {
     font-weight: 600;
     background-color: #8257e6;
+    margin-bottom: 30px;
 
     &:active {
       background-color: #8257e5;
