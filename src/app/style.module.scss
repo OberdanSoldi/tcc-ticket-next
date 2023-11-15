@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+
+  .titles {
+    text-align: center;
+    max-width: 25%;
+  }
+
+  .list {
+    margin-top: 60px;
+    text-align: center;
+  }
+}
