@@ -41,7 +41,7 @@ const App = () => {
         </Typography>
       </Grid>
       <Grid item className={style.footer}>
-        <Link href="/login">
+        <Link href="/auth/login">
           <Button
             className={style.goToLoginButton}
             fullWidth
