@@ -15,3 +15,11 @@
     text-align: center;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    .titles {
+      max-width: 80%;
+    }
+  }
+}
