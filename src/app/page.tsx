@@ -1,15 +1,16 @@
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import LogoNoText from "@/../public/logo-no-text.svg";
 import CheckIcon from "@mui/icons-material/Check";
 
 import style from "./style.module.scss";
+import Link from "next/link";
 
 const App = () => {
   return (
     <Grid container className={style.container}>
       <Grid item>
-        <Image src={LogoNoText} width={400} height={350} alt="Logo" />
+        <Image src={LogoNoText} width={400} height={280} alt="Logo" />
       </Grid>
       <Grid item className={style.titles}>
         <Typography fontSize={48} variant="h1" color="white">
@@ -38,6 +39,18 @@ const App = () => {
         <Typography variant="subtitle1" color="white">
           <CheckIcon fontSize="small" /> Acesso restrito para convidados
         </Typography>
+      </Grid>
+      <Grid item className={style.footer}>
+        <Link href="/login">
+          <Button
+            className={style.goToLoginButton}
+            fullWidth
+            variant="contained"
+            color="primary"
+          >
+            Ir para o Login
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   );

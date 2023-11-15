@@ -13,6 +13,24 @@
   .list {
     margin-top: 60px;
     text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .goToLoginButton {
+    font-weight: 600;
+    background-color: #8257e6;
+
+    &:active {
+      background-color: #8257e5;
+    }
+
+    &:hover {
+      background-color: #906de2;
+    }
+
+    &:disabled {
+      background-color: #8257e6;
+    }
   }
 }
 
