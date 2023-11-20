@@ -9,10 +9,10 @@ import Link from "next/link";
 const App = () => {
   return (
     <Grid container className={style.container}>
-      <Grid item>
+      <Grid item xs={12} md={12}>
         <Image src={LogoNoText} width={400} height={280} alt="Logo" />
       </Grid>
-      <Grid item className={style.titles}>
+      <Grid item xs={12} md={12} className={style.titles}>
         <Typography fontSize={48} variant="h1" color="white">
           Ticket Manager
         </Typography>
@@ -20,7 +20,7 @@ const App = () => {
           Software de Gerenciamento de Chamados de Manutenção
         </Typography>
       </Grid>
-      <Grid item className={style.list}>
+      <Grid item xs={12} md={12} className={style.list}>
         <Typography variant="subtitle1" color="white">
           <CheckIcon fontSize="small" /> Segurança
         </Typography>
@@ -40,7 +40,7 @@ const App = () => {
           <CheckIcon fontSize="small" /> Acesso restrito para convidados
         </Typography>
       </Grid>
-      <Grid item className={style.footer}>
+      <Grid item xs={12} md={12} className={style.footer}>
         <Link href="/auth/login">
           <Button
             className={style.goToLoginButton}
