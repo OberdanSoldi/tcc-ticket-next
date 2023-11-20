@@ -92,6 +92,10 @@ const ManageTicketsTable: React.FC = () => {
               thickness: 5,
               size: 40,
             }}
+            muiSkeletonProps={{
+              animation: "pulse",
+              height: 1,
+            }}
           />
         </CardContent>
       </Card>

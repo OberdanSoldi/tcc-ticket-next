@@ -125,7 +125,7 @@ const HistoryTable: React.FC = () => {
             }}
             muiSkeletonProps={{
               animation: "pulse",
-              height: 28,
+              height: 1,
             }}
           />
         </CardContent>
