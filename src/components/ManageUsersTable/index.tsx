@@ -1,15 +1,16 @@
 import type { User } from "@/domain/User";
 import { Card, CardContent } from "@mui/material";
-import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 
 import style from "./style.module.scss";
 import React from "react";
 import { userService } from "@/services/user-service";
 import { DeleteUser } from "./DeleteUser";
 import { BottomToolbar } from "./BottomToolbar";
+import { MRT_ColumnDef, MaterialReactTable } from "material-react-table";
 
 const ManageUsersTable: React.FC = () => {
   const [users, setUsers] = React.useState<User[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     (async () => {
@@ -18,8 +19,10 @@ const ManageUsersTable: React.FC = () => {
   }, []);
 
   async function fetchUsers() {
+    setLoading(true);
     const response = await userService.getUsers();
     setUsers(response);
+    setLoading(false);
   }
 
   const tableColumns: MRT_ColumnDef<User>[] = [
@@ -81,6 +84,16 @@ const ManageUsersTable: React.FC = () => {
             renderRowActions={({ row, table }) => (
               <DeleteUser fetchUsers={fetchUsers} row={row} table={table} />
             )}
+            state={{ isLoading: loading }}
+            muiCircularProgressProps={{
+              color: "secondary",
+              thickness: 5,
+              size: 55,
+            }}
+            muiSkeletonProps={{
+              animation: "pulse",
+              height: 28,
+            }}
           />
         </CardContent>
       </Card>

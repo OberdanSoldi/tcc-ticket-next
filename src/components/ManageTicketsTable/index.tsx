@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@mui/material";
-import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import type { Ticket } from "@/domain/Ticket";
 import { TicketTableActions } from "./TicketTableActions";
 import { getStatusColor } from "@/utils/get-status-color";
@@ -7,14 +6,17 @@ import { ticketService } from "@/services/ticket-service";
 import React from "react";
 
 import style from "./style.module.scss";
+import { MRT_ColumnDef, MaterialReactTable } from "material-react-table";
 
 const ManageTicketsTable: React.FC = () => {
   const [tickets, setTickets] = React.useState<Ticket[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   async function fetchTickets() {
+    setLoading(true);
     const response = await ticketService.getAllTickets();
-
     setTickets(response.filter((ticket) => ticket.status !== "Fechado"));
+    setLoading(false);
   }
 
   React.useEffect(() => {
@@ -84,6 +86,16 @@ const ManageTicketsTable: React.FC = () => {
                 table={table}
               />
             )}
+            state={{ isLoading: loading }}
+            muiCircularProgressProps={{
+              color: "secondary",
+              thickness: 5,
+              size: 55,
+            }}
+            muiSkeletonProps={{
+              animation: "pulse",
+              height: 28,
+            }}
           />
         </CardContent>
       </Card>

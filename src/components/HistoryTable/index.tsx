@@ -1,5 +1,4 @@
 "use client";
-import MaterialReactTable, { type MRT_ColumnDef } from "material-react-table";
 import React from "react";
 import { Card, CardContent } from "@mui/material";
 import type { Ticket } from "@/domain/Ticket";
@@ -10,10 +9,12 @@ import { userService } from "@/services/user-service";
 import { UserRole } from "@/domain/enums/UserRole";
 
 import style from "./style.module.scss";
+import { MRT_ColumnDef, MaterialReactTable } from "material-react-table";
 
 const HistoryTable: React.FC = () => {
   const [userRole, setUserRole] = React.useState<UserRole>();
   const [tickets, setTickets] = React.useState<Ticket[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     userService.getUserRole().then((role) => {
@@ -40,13 +41,17 @@ const HistoryTable: React.FC = () => {
   }, [userRole]);
 
   async function fetchAllTickets() {
+    setLoading(true);
     const tickets = await ticketService.getAllTickets();
     setTickets(tickets);
+    setLoading(false);
   }
 
   async function fetchUserTickets() {
+    setLoading(true);
     const tickets = await userService.getTicketsCreatedByUser();
     setTickets(tickets);
+    setLoading(false);
   }
 
   const adminTableColumns: MRT_ColumnDef<Ticket>[] = [
@@ -112,6 +117,16 @@ const HistoryTable: React.FC = () => {
             renderRowActions={({ row, table }) => (
               <SeeFullTicket row={row} table={table} />
             )}
+            state={{ isLoading: loading }}
+            muiCircularProgressProps={{
+              color: "secondary",
+              thickness: 5,
+              size: 55,
+            }}
+            muiSkeletonProps={{
+              animation: "pulse",
+              height: 28,
+            }}
           />
         </CardContent>
       </Card>
