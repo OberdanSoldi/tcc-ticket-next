@@ -74,6 +74,9 @@ const ManageTicketsTable: React.FC = () => {
             enableStickyHeader
             enableBottomToolbar={false}
             muiTableContainerProps={{ sx: { maxHeight: "550px" } }}
+            localization={{
+              noRecordsToDisplay: "Nenhum ticket encontrado",
+            }}
             renderRowActions={({ row, table }) => (
               <TicketTableActions
                 fetchTickets={fetchTickets}
