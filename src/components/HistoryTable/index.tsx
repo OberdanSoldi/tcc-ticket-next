@@ -120,8 +120,8 @@ const HistoryTable: React.FC = () => {
             state={{ isLoading: loading }}
             muiCircularProgressProps={{
               color: "secondary",
-              thickness: 5,
-              size: 55,
+              thickness: 3,
+              size: 40,
             }}
             muiSkeletonProps={{
               animation: "pulse",

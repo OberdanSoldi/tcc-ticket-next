@@ -66,7 +66,7 @@ const ManageUsersTable: React.FC = () => {
             state={{ isLoading: loading }}
             muiCircularProgressProps={{
               color: "secondary",
-              thickness: 5,
+              thickness: 3,
               size: 40,
             }}
             muiSkeletonProps={{
