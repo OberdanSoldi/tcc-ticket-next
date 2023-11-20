@@ -90,11 +90,7 @@ const ManageTicketsTable: React.FC = () => {
             muiCircularProgressProps={{
               color: "secondary",
               thickness: 5,
-              size: 55,
-            }}
-            muiSkeletonProps={{
-              animation: "pulse",
-              height: 28,
+              size: 40,
             }}
           />
         </CardContent>

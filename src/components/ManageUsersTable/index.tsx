@@ -40,27 +40,6 @@ const ManageUsersTable: React.FC = () => {
     },
   ];
 
-  const fakeData: User[] = [
-    {
-      email: "email@example.com",
-      name: "John Doe",
-      role: "Administrador",
-      id: "2",
-    },
-    {
-      email: "email@example.com",
-      name: "John Doe",
-      role: "Administrador",
-      id: "3",
-    },
-    {
-      email: "email@example.com",
-      name: "John Doe",
-      role: "Administrador",
-      id: "1",
-    },
-  ];
-
   return (
     <div className={style.wrapper}>
       <Card className={style.container}>
@@ -88,11 +67,7 @@ const ManageUsersTable: React.FC = () => {
             muiCircularProgressProps={{
               color: "secondary",
               thickness: 5,
-              size: 55,
-            }}
-            muiSkeletonProps={{
-              animation: "pulse",
-              height: 28,
+              size: 40,
             }}
           />
         </CardContent>
